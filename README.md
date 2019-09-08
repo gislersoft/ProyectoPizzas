@@ -13,6 +13,7 @@ virtualenv nombre_del_proyecto
 pip install django
 python .\Scripts\django-admin.py startproject nombre_proyecto
 ```
+
 Verificar que se está en la raíz del virtual env y que este está activo.
 Renombrar de nombre_proyecto a src para no tener confusiones.
 Entrar a src y ejecutar:
