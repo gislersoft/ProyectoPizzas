@@ -1,10 +1,6 @@
 # Projeto Pizzas
 
-
 # Cosas para tener en cuenta en Django
-
-
-
 
 
 ```
