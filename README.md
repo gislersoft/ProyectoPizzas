@@ -2,7 +2,7 @@
 
 # Cosas para tener en cuenta en Django
 
-HOLA
+HOLA  ESTO ES UNA PRUEBA
 ```
 pip install virtualenv
 virtualenv nombre_del_proyecto
