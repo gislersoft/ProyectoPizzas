@@ -1,6 +1,6 @@
 # Projeto Pizzas
 
-# Cosas para tener en cuenta en Django
+# Cosas para tener en cuenta en Django 
 
 ```
 pip install virtualenv
