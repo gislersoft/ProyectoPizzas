@@ -3,6 +3,8 @@
 
 # Cosas para tener en cuenta en Django
 
+
+
 ```
 pip install virtualenv
 virtualenv nombre_del_proyecto
