@@ -33,3 +33,7 @@ python manage.py startapp nombre_app (crear nueva app)
 * En la aplicación se crea el **forms.py** para los formularios a renderizar (formularios que no son basados en un modelo, por ejemplo, un formulario de contacto)
 * En views se debe importar el form y crear un diccionario para el "contexto". Lo que va entre comillas es lo que se pone en el html para renderizar
 * **python manage.py** collectstatic para recoger archivos estáticos
+
+# Proceso de Desarrollo
+
+![](https://cacoo.com/diagrams/6fFkxVBMKJylctwI-D5150.png)
