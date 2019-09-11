@@ -36,4 +36,4 @@ python manage.py startapp nombre_app (crear nueva app)
 
 # Proceso de Desarrollo
 
-![proceso desarrollo](https://cacoo.com/diagrams/6fFkxVBMKJylctwI-D5150.png)
+![ProcesoDesarrollo](https://user-images.githubusercontent.com/9287467/64737373-52354200-d4b2-11e9-875d-3a9bb75c73bf.png)
