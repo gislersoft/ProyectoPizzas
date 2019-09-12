@@ -53,7 +53,7 @@ python manage.py startapp nombre_app (crear nueva app)
 * En views se debe importar el form y crear un diccionario para el "contexto". Lo que va entre comillas es lo que se pone en el html para renderizar
 * **python manage.py** collectstatic para recoger archivos estáticos
 
-## Proceso de Code Review 📌
+## Proceso de Code Review
 
 Este diagrama de procesos describe las interacciones que ocurren entre el desarrollador, git, github, jenkins y su par programador encargado de verificar el código.
 
