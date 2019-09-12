@@ -2,7 +2,24 @@
 
 Este es el repositorio principal del proyecto de pizzas, en este readme encontrarás toda la ayuda recopilada por el equipo para el proceso de desarrollo.
 
-# Cosas para tener en cuenta en Django
+# Indice
+
+* [Prácticas Ágiles](#prácticas-ágiles)
+* [Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django)
+* [Proceso de Code Review](#proceso-de-code-review)
+* [Preguntas frecuentes sobre GitHub](#preguntas-frecuentes-sobre-github)
+
+## Prácticas Ágiles
+
+* Daily Meetings
+* Kanban Board
+* Retrospectiva
+* Planning
+* Continuous Integration / Continuos Deployment
+* Par programador (Code Review)
+* DevOps
+
+## Preguntas frecuentes sobre Django
 
 ```
 pip install virtualenv
@@ -36,15 +53,20 @@ python manage.py startapp nombre_app (crear nueva app)
 * En views se debe importar el form y crear un diccionario para el "contexto". Lo que va entre comillas es lo que se pone en el html para renderizar
 * **python manage.py** collectstatic para recoger archivos estáticos
 
-# Proceso de Code Review
+## Proceso de Code Review
 
 Este diagrama de procesos describe las interacciones que ocurren entre el desarrollador, git, github, jenkins y su par programador encargado de verificar el código.
 
 ![ProcesoDesarrollo](https://user-images.githubusercontent.com/9287467/64791593-8e61b480-d53d-11e9-99a6-6998478d6550.png)
 
-# Preguntas frecuentes sobre GitHub
+## Preguntas frecuentes sobre GitHub
 
-[here](#qué-es-un-pull-request)
+* [¿Qué es un Pull Request?](#qué-es-un-pull-request)
+* [¿Qué debo hacer si mi Pull Request falló?](#qué-debo-hacer-si-mi-pull-request-falló)
+* [¿Qué debo hacer si mi Pull Request pasó?](#qué-debo-hacer-si-mi-pull-request-pasó)
+* [¿Qué debo hacer si mi Pull Request tiene conflictos?](#qué-debo-hacer-si-mi-pull-request-tiene-conflictos)
+* [¿Porqué toma tanto tiempo Jenkins en actualizar mi Pull Request?](#porqué-toma-tanto-tiempo-Jenkins-en-actualizar-mi-pull-request)
+* [¿Porqué Jenkins no ha empezado el build de mi Pull Request?](#porqué-jenkins-no-ha-empezado-el-build-de-mi-pull-request)
 
 ### ¿Qué es un Pull Request?
 
@@ -56,7 +78,6 @@ En el caso de que el PR tenga un comentario de Jenkins explicando que el build h
 
 1. Introducir las credenciales de Jenkins.
 2. Dar click en la opción "Console Log".
-
 
 ### ¿Qué debo hacer si mi Pull Request pasó?
 
@@ -89,10 +110,6 @@ b = a + 2;
 ```
 
 Cuando esto ocurre en la interfaz web de github se marca el conflicto cómo resuelto, si se está usando la línea de comandos se debe hacer un `git add archivo` marcando que el archivo en cuestión ya tiene todos los conflictos resueltos, un **ERROR** muy común es olvidar resolver otros conflictos en el archivo **NO OLVIDES** resolverlos todos antes de marcar el archivo cómo resuelto.
-
-
-
-
 
 ### ¿Porqué toma tanto tiempo Jenkins en actualizar mi Pull Request?
 
