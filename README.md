@@ -1,4 +1,4 @@
-# Proyecto Pizzas
+# Proyecto Pizzas 🍕
 
 Este es el repositorio principal del proyecto de pizzas, en este readme encontrarás toda la ayuda recopilada por el equipo para el proceso de desarrollo.
 
