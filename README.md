@@ -4,12 +4,12 @@ Este es el repositorio principal del proyecto de pizzas, en este readme encontra
 
 # Indice
 
-* 📌[Prácticas Ágiles](#prácticas-ágiles-📌)
-* 📌[Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django-📌)
-* 📌[Proceso de Code Review](#proceso-de-code-review-📌)
-* 📌[Preguntas frecuentes sobre GitHub](#preguntas-frecuentes-sobre-github-📌)
+* 📌[Prácticas Ágiles](#prácticas-ágiles)
+* 📌[Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django)
+* 📌[Proceso de Code Review](#proceso-de-code-review)
+* 📌[Preguntas frecuentes sobre GitHub](#preguntas-frecuentes-sobre-github)
 
-## Prácticas Ágiles 📌
+## Prácticas Ágiles
 
 * Daily Meetings
 * Kanban Board
@@ -19,7 +19,7 @@ Este es el repositorio principal del proyecto de pizzas, en este readme encontra
 * Par programador (Code Review)
 * DevOps
 
-## Preguntas frecuentes sobre Django 📌
+## Preguntas frecuentes sobre Django
 
 ```
 pip install virtualenv
@@ -59,7 +59,7 @@ Este diagrama de procesos describe las interacciones que ocurren entre el desarr
 
 ![ProcesoDesarrollo](https://user-images.githubusercontent.com/9287467/64791593-8e61b480-d53d-11e9-99a6-6998478d6550.png)
 
-## Preguntas frecuentes sobre GitHub 📌
+## Preguntas frecuentes sobre GitHub
 
 * [¿Qué es un Pull Request?](#qué-es-un-pull-request)
 * [¿Qué debo hacer si mi Pull Request falló?](#qué-debo-hacer-si-mi-pull-request-falló)
