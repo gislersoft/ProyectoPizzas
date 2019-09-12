@@ -37,5 +37,6 @@ python manage.py startapp nombre_app (crear nueva app)
 # Proceso de Code Review
 
 Este diagrama de procesos describe las interacciones que ocurren entre el desarrollador, git, github, jenkins y su par programador encargado de verificar el código.
-
+<kbd>
 ![ProcesoDesarrollo](https://user-images.githubusercontent.com/9287467/64791593-8e61b480-d53d-11e9-99a6-6998478d6550.png)
+</kbd>
