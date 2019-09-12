@@ -4,10 +4,10 @@ Este es el repositorio principal del proyecto de pizzas, en este readme encontra
 
 # Indice
 
-* 📌[Prácticas Ágiles](#prácticas-ágiles)
-* 📌[Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django)
-* 📌[Proceso de Code Review](#proceso-de-code-review)
-* 📌[Preguntas frecuentes sobre GitHub](#preguntas-frecuentes-sobre-github)
+* 📌[Prácticas Ágiles](#prácticas-ágiles-📌)
+* 📌[Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django-📌)
+* 📌[Proceso de Code Review](#proceso-de-code-review-📌)
+* 📌[Preguntas frecuentes sobre GitHub](#preguntas-frecuentes-sobre-github-📌)
 
 ## Prácticas Ágiles 📌
 
