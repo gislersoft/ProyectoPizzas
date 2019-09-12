@@ -44,6 +44,8 @@ Este diagrama de procesos describe las interacciones que ocurren entre el desarr
 
 # Preguntas frecuentes sobre GitHub
 
+[here](#qué-es-un-pull-request)
+
 ### ¿Qué es un Pull Request?
 
 Un Pull Request (PR) es un intento de mezclar una rama dentro de la rama principal u otra rama, este proceso se realiza desde la interfaz web de github, se debe tener en cuente desde que rama se está haciendo el PR y a que rama se está intentando mezclar.
