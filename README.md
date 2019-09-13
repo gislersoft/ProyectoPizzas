@@ -4,10 +4,19 @@ Este es el repositorio principal del proyecto de pizzas, en este readme encontra
 
 # Indice
 
+* 📌[Dominio y Tenants](#dominioytenants)
 * 📌[Prácticas Ágiles](#prácticas-ágiles)
 * 📌[Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django)
 * 📌[Proceso de Code Review](#proceso-de-code-review)
 * 📌[Preguntas frecuentes sobre GitHub](#preguntas-frecuentes-sobre-github)
+
+## Dominio y Tenants
+
+* **Franquicia:** El tenant "La cuenta" Ejemplos de franquicias: Pizza Hut, Jennos Pizza, Dominos Pizza etc.
+* **Usuarios:** Los que se loguean al sistema y pueden tener los siguientes roles: Administrador, Digitar y Cliente.
+* **Superusuario:** El superusuario se encarga de administrar todas las franquicias y tiene acceso a vistas especiales.
+
+![tenants](https://user-images.githubusercontent.com/9287467/64831865-3064b980-d59d-11e9-874f-61fac23907ab.png)
 
 ## Prácticas Ágiles
 
