@@ -47,7 +47,8 @@ Entrar a src y ejecutar:
 
 ```
 python manage.py runserver (dentro del src para ejecutar servidor)
-python manage.py migrate (migrar bases de datos [investigar para qué sirve esto])
+python manage.py migrate (migrar bases de datos)
+python manage.py makemigrations
 ```
 
 En settings.py se puede cambiar el idioma en la opción LANGUAGES
