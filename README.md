@@ -33,6 +33,11 @@ Este es el repositorio principal del proyecto de pizzas, en este readme encontra
 ```
 pip install virtualenv
 virtualenv nombre_del_proyecto
+```
+o
+`python -m venv nombre_del_entorno`
+
+```
 pip install django
 python .\Scripts\django-admin.py startproject nombre_proyecto
 ```
