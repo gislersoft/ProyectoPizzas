@@ -33,6 +33,17 @@ Este es el repositorio principal del proyecto de pizzas, en este readme encontra
 ```
 pip install virtualenv
 virtualenv nombre_del_proyecto
+```
+o
+```
+python -m venv nombre_del_entorno
+```
+
+En `nombre_del_entorno/Scripts` se encuentran scripts llamados `activate` con diferentes extensiones.
+Estos scripts sirven para activar el entorno virtual. En PyCharm, se puede seleccionar el entorno virtual para el proyecto, para que el IDE lo active automáticamente al abrir el proyecto, e incluso el mismo PyCharm puede crear entornos virtuales para el proyecto.
+En caso de necesitar desactivar el entorno virtual, usar el comando `deactivate`
+
+```
 pip install django
 python .\Scripts\django-admin.py startproject nombre_proyecto
 ```
@@ -42,7 +53,8 @@ Entrar a src y ejecutar:
 
 ```
 python manage.py runserver (dentro del src para ejecutar servidor)
-python manage.py migrate (migrar bases de datos [investigar para qué sirve esto])
+python manage.py migrate (migrar bases de datos)
+python manage.py makemigrations
 ```
 
 En settings.py se puede cambiar el idioma en la opción LANGUAGES
