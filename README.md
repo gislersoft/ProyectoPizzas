@@ -2,6 +2,10 @@
 
 Este es el repositorio principal del proyecto de pizzas, en este readme encontrarás toda la ayuda recopilada por el equipo para el proceso de desarrollo.
 
+# Proyecto en Trello
+
+Este es el link de acceso al kanban board del proyecto: https://trello.com/b/vbVWTBxC/superpizzas
+
 # Indice
 
 * 📌[Dominio y Tenants](#dominioytenants)
