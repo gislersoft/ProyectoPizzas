@@ -6,6 +6,8 @@ Este es el repositorio principal del proyecto de pizzas, en este readme encontra
 
 Este es el link de acceso al kanban board del proyecto: https://tree.taiga.io/project/josealejolibreros-superpizzas/backlog
 
+Recuerda agregar los criterios de aceptación a las  historias de usuario.
+
 # Indice
 
 * 📌[Dominio y Tenants](#dominioytenants)
