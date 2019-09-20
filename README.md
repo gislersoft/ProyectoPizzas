@@ -14,6 +14,7 @@ Recuerda agregar los criterios de aceptación a las  historias de usuario.
 * 📌[Prácticas Ágiles](#prácticas-ágiles)
 * 📌[Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django)
 * 📌[Proceso de Code Review](#proceso-de-code-review)
+* 📌[Comandos Básicos de GIT](#comandos-básicos-de-git)
 * 📌[Preguntas frecuentes sobre GitHub](#preguntas-frecuentes-sobre-github)
 
 ## Dominio y Tenants
@@ -85,6 +86,16 @@ python manage.py startapp nombre_app (crear nueva app)
 Este diagrama de procesos describe las interacciones que ocurren entre el desarrollador, git, github, jenkins y su par programador encargado de verificar el código.
 
 ![ProcesoDesarrollo](https://user-images.githubusercontent.com/9287467/64791593-8e61b480-d53d-11e9-99a6-6998478d6550.png)
+
+## Comandos Básicos de GIT
+
+`git clone <URL_DEL_REPOSITORIO>` --> Clona el repositorio
+`git pull origin master` --> Sincroniza el repositorio local con la rama MASTER del repositorio ORIGIN
+`git add <ARCHIVO>` --> Marca el archivo modificado como parte de un commit
+`git reset HEAD <ARCHIVO>` --> Quita el archivo del STAGING 
+`git push <REPOSITORIO_REMOTO> <BRANCH>` --> Envia cambios a la rama BRANCH del REPOSITORIO_REMOTO
+`git commit -m "MENSAJE_DESCRIPTIVO_DEL_COMMIT" ` --> Crea el COMMIT con los cambios marcados en el STAGING y pone el mensaje descriptivo 
+
 
 ## Preguntas frecuentes sobre GitHub
 
