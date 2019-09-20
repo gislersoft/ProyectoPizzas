@@ -2,9 +2,9 @@
 
 Este es el repositorio principal del proyecto de pizzas, en este readme encontrarás toda la ayuda recopilada por el equipo para el proceso de desarrollo.
 
-# Proyecto en Trello
+# Proyecto en Taiga
 
-Este es el link de acceso al kanban board del proyecto: https://trello.com/b/vbVWTBxC/superpizzas
+Este es el link de acceso al kanban board del proyecto: https://tree.taiga.io/project/josealejolibreros-superpizzas/backlog
 
 # Indice
 
