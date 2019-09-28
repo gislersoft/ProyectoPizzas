@@ -44,3 +44,17 @@ class User(AbstractBaseUser):
         if self.avatar:
             return self.avatar.url
         return f"{settings.STATIC_URL}{User.DEFAULT_AVATAR}"
+
+    @classmethod
+    def initial_user(cls, email="admin@admin.co", password="superpizzas"):
+        if not User.objects.count():
+            user =User.objects.create(
+                    email=email,
+                    is_active=True,
+            )
+            user.set_password(password)
+            user.save()
+
+            return User
+
+        return User.objects.get(email=email)

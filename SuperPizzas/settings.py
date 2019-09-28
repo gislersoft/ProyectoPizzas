@@ -114,11 +114,10 @@ POSTGRES_PASSWORD = "postgres"
 
 # settings set via env/secrets.env
 REPO_DIR = os.path.dirname(BASE_DIR)
-ENV_DIR = os.path.join(REPO_DIR, "env")
+ENV_DIR = os.path.join(BASE_DIR, "env")
 ENV_SECRETS_FILE = os.path.join(ENV_DIR, "secrets.env")
 ENV_SECRETS = load_env_settings(dotenv_path=ENV_SECRETS_FILE, defaults=globals())
 globals().update(ENV_SECRETS)
-
 
 DATABASES = {
     "default": {
@@ -170,3 +169,5 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
 MAX_FILE_SIZE = 10485760  # 10MB
+
+DOMAIN = "localhost"
