@@ -2,6 +2,7 @@
 
 Este es el repositorio principal del proyecto de pizzas, en este readme encontrarás toda la ayuda recopilada por el equipo para el proceso de desarrollo.
 
+
 # Proyecto en Taiga
 
 Este es el link de acceso al kanban board del proyecto: https://tree.taiga.io/project/josealejolibreros-superpizzas/backlog
@@ -12,6 +13,7 @@ Recuerda agregar los criterios de aceptación a las  historias de usuario.
 
 * 📌[Dominio y Tenants](#dominioytenants)
 * 📌[Prácticas Ágiles](#prácticas-ágiles)
+* 📌[Instalación](#instalación)
 * 📌[Preguntas frecuentes sobre Django](#preguntas-frecuentes-sobre-django)
 * 📌[Proceso de Code Review](#proceso-de-code-review)
 * 📌[Comandos Básicos de GIT](#comandos-básicos-de-git)
@@ -34,6 +36,21 @@ Recuerda agregar los criterios de aceptación a las  historias de usuario.
 * Continuous Integration / Continuos Deployment
 * Par programador (Code Review)
 * DevOps
+
+## Instalación
+
+Ubicarse en la carpeta raíz del repositorio
+
+1)Instalar los requerimientos pip3 install -r requirements.pip
+
+2)Crear una base de datos para el proyecto y actualizar la configuración de BD en env/secrets.env
+
+3)Sincronizar la base de datos: python manage.py migrate
+
+4)Ejecutar el comando: python manage.py initial_franchise para crear el tenant publico:
+
+Los datos de acceso por defecto son: email="admin@admin.co", password="superpizzas"
+
 
 ## Preguntas frecuentes sobre Django
 
