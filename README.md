@@ -106,13 +106,13 @@ Este diagrama de procesos describe las interacciones que ocurren entre el desarr
 
 ## Comandos Básicos de GIT
 
-`git clone <URL_DEL_REPOSITORIO>` --> Clona el repositorio
-`git pull origin master` --> Sincroniza el repositorio local con la rama MASTER del repositorio ORIGIN
-`git add <ARCHIVO>` --> Marca el archivo modificado como parte de un commit
-`git reset HEAD <ARCHIVO>` --> Quita el archivo del STAGING 
-`git push <REPOSITORIO_REMOTO> <BRANCH>` --> Envia cambios a la rama BRANCH del REPOSITORIO_REMOTO
-`git commit -m "MENSAJE_DESCRIPTIVO_DEL_COMMIT" ` --> Crea el COMMIT con los cambios marcados en el STAGING y pone el mensaje descriptivo 
-`git branch ` --> Muestra las ramas del repositorio local
+- `git clone <URL_DEL_REPOSITORIO>` --> Clona el repositorio
+- `git pull origin master` --> Sincroniza el repositorio local con la rama MASTER del repositorio ORIGIN
+- `git add <ARCHIVO>` --> Marca el archivo modificado como parte de un commit
+- `git reset HEAD <ARCHIVO>` --> Quita el archivo del STAGING 
+- `git push <REPOSITORIO_REMOTO> <BRANCH>` --> Envia cambios a la rama BRANCH del REPOSITORIO_REMOTO
+- `git commit -m "MENSAJE_DESCRIPTIVO_DEL_COMMIT" ` --> Crea el COMMIT con los cambios marcados en el STAGING y pone el mensaje descriptivo 
+- `git branch ` --> Muestra las ramas del repositorio local
 
 ## Preguntas frecuentes sobre GitHub
 
