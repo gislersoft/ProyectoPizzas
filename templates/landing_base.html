@@ -1,0 +1,372 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ request.tenant.name }} | {% block title %} {% endblock title %}</title>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon.png' %}">    <!--STYLESHEET-->
+
+  <!--STYLESHEET-->
+  <!--=================================================-->
+
+  <!--Open Sans Font [ OPTIONAL ]-->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+
+  <!--Bootstrap Stylesheet [ REQUIRED ]-->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+  <!--Nifty Stylesheet [ REQUIRED ]-->
+  <link href="{% static 'css/nifty.min.css' %}" rel="stylesheet">
+
+  <!--Themify Icons [ OPTIONAL ]-->
+  <link href="{% static 'plugins/themify-icons/themify-icons.min.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+  <!-- notifications -->
+  <link rel="stylesheet" href="{% static 'plugins/toast/toastr/toastr.min.css' %}">
+
+  {% with "css/themes/type-a/theme-well-red.min.css" as style_url %}
+    <link id="app-theme" rel="stylesheet" href="{% static style_url %}">
+  {% endwith %}
+
+  {% block css %}
+  {% endblock css %}
+
+  <!--JAVASCRIPT-->
+  <!--=================================================-->
+
+  <!--Pace - Page Load Progress Par [OPTIONAL]-->
+  <link href="{% static 'plugins/pace/pace.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <script src="{% static 'plugins/pace/pace.min.js' %}"></script>
+
+
+  <!--jQuery [ REQUIRED ]-->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+
+
+  <!--BootstrapJS [ RECOMMENDED ]-->
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+  <!--NiftyJS [ RECOMMENDED ]-->
+  <script src="{% static 'js/nifty.min.js' %}"></script>
+  {{ form.media }}
+
+  {% block head_js %}
+  {% endblock head_js %}
+
+  <!--=================================================
+
+  REQUIRED
+  You must include this in your project.
+
+
+  RECOMMENDED
+  This category must be included but you may modify which plugins or components which should be included in your project.
+
+
+  OPTIONAL
+  Optional plugins. You may choose whether to include it in your project or not.
+
+
+  DEMONSTRATION
+  This is to be removed, used for demonstration purposes only. This category must not be included in your project.
+
+
+  SAMPLE
+  Some script samples which explain how to initialize plugins or components. This category should not be included in your project.
+
+
+  Detailed information and more samples can be found in the document.
+
+  =================================================-->
+
+
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+
+<body>
+
+<div id="container" class="effect aside-float aside-bright boxed-layout"
+     style="background-image:url({% static 'img/bg-img/1.jpg' %}); background-repeat: no-repeat; background-size: cover;">
+
+  <!--NAVBAR-->
+  <!--===================================================-->
+  <header id="navbar">
+    <div id="navbar-container" class="boxed">
+
+      <!--Brand logo & name-->
+      <!--================================-->
+      <div class="navbar-header">
+        <a href="{% url 'home' %}" class="navbar-brand">
+          {% comment %}
+                                <img src="{% static 'img/logo.png' %}" class="brand-icon">
+                                {% endcomment %}
+          <div class="brand-title">
+            <span class="brand-text">{% if request.tenant.schema_name != "public" %}{{ request.tenant.name }}{% else %}Super Pizzas{% endif %}</span>
+          </div>
+        </a>
+      </div>
+      <!--================================-->
+      <!--End brand logo & name-->
+
+
+      <!--Navbar Dropdown-->
+      <!--================================-->
+      <div class="navbar-content clearfix">
+        <ul class="nav navbar-top-links pull-right">
+
+          <!--User dropdown-->
+          <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+          <li id="dropdown-user" class="dropdown">
+            {% if request.user.is_authenticated %}
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                    <span class="ic-user pull-right">
+                                        {% if user.avatar %}
+                                          <img class="img-circle img-user media-object" src="{{ user.avatar.url }}" alt="">
+                                        {% else %}
+                                          <img class="img-circle img-user media-object" src="{% static 'img/desconocido.jpg' %}" alt="">
+                                        {% endif %}
+                                    </span>
+                <div class="username hidden-xs">
+                  {{ user.get_full_name }} ({{ user.user_type }})
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
+
+                <!-- User dropdown menu -->
+                <ul class="head-list">
+                  <li>
+                    <a href="{% url 'usuario_perfil_usuario' user.pk %}">
+                      Perfil del usuario
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'dashboard' %}">
+                      Dashboard
+                    </a>
+                  </li>
+                </ul>
+
+                <!-- Dropdown footer -->
+                <div class="pad-all text-right">
+                  <a href="{% url 'logout' %}" class="btn btn-primary">
+                    Cerrar sesión
+                  </a>
+                </div>
+              </div>
+            {% else %}
+
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                        <span class="ic-user pull-right">
+                                            <img class="img-circle img-user media-object" src="{% static 'img/desconocido.jpg' %}" alt="">
+                                        </span>
+                <div class="username hidden-xs">
+                  Ingresar
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
+                <ul class="head-list">
+                  <li>
+                    <a href="">
+                      Ingreso a la aplicación
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            {% endif %}
+          </li>
+          <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+          <!--End user dropdown-->
+        </ul>
+        {% if not request.user.is_authenticated %}
+          <ul class="nav navbar-top-links pull-right">
+            <!--Navigation toogle button-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <li id="dropdown-user" class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+
+                                        <span class="ic-user pull-right">
+                                            <img class="img-circle img-user media-object" src="{% static 'img/profile-photos/2.png' %}" alt="">
+                                        </span>
+
+                <div class="username hidden-xs">
+                  {% if request.tenant.schema_name != "public" %}Participante{% else %}Cliente{% endif %}
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
+                <ul class="head-list">
+                  <li>
+                    <a href="">
+                      Registrarse
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End Navigation toogle button-->
+          </ul>
+        {% endif %}
+      </div>
+      <!--================================-->
+      <!--End Navbar Dropdown-->
+
+    </div>
+  </header>
+  <!--===================================================-->
+  <!--END NAVBAR-->
+
+
+  <div class="boxed">
+
+    <!--CONTENT CONTAINER-->
+    <!--===================================================-->
+    <div id="content-container">
+      <div id="page-head">
+
+        <!--Page Title-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+        <div id="page-title">
+          <h1 class="page-header text-overflow">
+            {% block page_title %} {% endblock page_title %}
+          </h1>
+        </div>
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--End page title-->
+
+        {% comment %}
+          <!--Breadcrumb-->
+          <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+          <ol class="breadcrumb">
+              {% block breadcrumb %}
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Forms</a></li>
+                  <li class="active">General Elements</li>
+              {% endblock breadcrumb %}
+          </ol>
+          <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+          <!--End breadcrumb-->
+        {% endcomment %}
+
+      </div>
+
+
+      <!--Page content-->
+      <!--===================================================-->
+
+      <div id="page-content">
+        {% block content %}
+          <div class="row">
+            <div class="col-sm-12">
+              <div class=" panel panel-primary">
+                <div class="panel-body">
+                  <h2 align="center">Últimas noticias</h2>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock content %}
+      </div>
+
+      <!--===================================================-->
+      <!--End page content-->
+
+
+    </div>
+
+    <!--===================================================-->
+    <!--END CONTENT CONTAINER-->
+    {% comment %}
+                <!--MAIN NAVIGATION-->
+                <!--===================================================-->
+                <nav id="mainnav-container">
+                    <div id="mainnav">
+
+                        <!--Menu-->
+                        <!--================================-->
+                        <div id="mainnav-menu-wrap">
+                            <div class="nano">
+                                <div class="nano-content">
+                                    <ul id="mainnav-menu" class="list-group">
+                                        {% include "menus/menu_base.html" %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--================================-->
+                        <!--End menu-->
+
+                    </div>
+                </nav>
+                <!--===================================================-->
+                <!--END MAIN NAVIGATION-->
+                {% endcomment %}
+
+  </div>
+
+
+  <!-- FOOTER -->
+  <!--===================================================-->
+  <footer id="footer">
+    <p class="pad-lft">&#0169; 2017 Your Company</p>
+  </footer>
+  <!--===================================================-->
+  <!-- END FOOTER -->
+
+
+  <!-- SCROLL PAGE BUTTON -->
+  <!--===================================================-->
+  <button class="scroll-top btn">
+    <i class="pci-chevron chevron-up"></i>
+  </button>
+  <!--===================================================-->
+
+
+</div>
+</div>
+<!--===================================================-->
+<!-- END OF CONTAINER -->
+
+
+<!-- notifications -->
+<script src="{% static 'plugins/toast/toastr-js/toastr.min.js' %}"></script>
+
+<script type="text/javascript">
+    $('form').attr('autocomplete', 'off');
+    {% for msg in messages %}
+        $(document).ready(function () {
+            setTimeout(function () {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "showEasing": "swing"
+                }
+                toastr["{{ msg.tags }}"]("{{msg}}")
+            }, 500);
+        });
+    {% endfor %}
+</script>
+
+{% block js %}
+{% endblock js %}
+
+</body>
+</html>

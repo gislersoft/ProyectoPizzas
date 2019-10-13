@@ -1,0 +1,10 @@
+<!--Category name-->
+<li class="list-header">Navegación</li>
+
+{% url 'test_base' as test_base %}
+<li class="{% if test_base in request.path %} active {% endif %}">
+  <a href="{{ test_base }}">
+    <i class="ti-home"></i>
+    <span class="menu-title">Inicio</span>
+  </a>
+</li>

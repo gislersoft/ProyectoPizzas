@@ -1,0 +1,55 @@
+{
+  "name": "password-strength-meter",
+  "version": "1.0.0",
+  "description": "A password strength meter plugin for jQuery",
+  "main": "dist/password.min.js",
+  "scripts": {
+    "test": "mocha",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- --reporter lcovonly -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/elboletaire/password-strength-meter.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "jquery",
+    "plugin",
+    "password",
+    "strength",
+    "meter",
+    "form",
+    "forms"
+  ],
+  "author": "Òscar Casajuana <elboletaire@gmail.com> (https://github.com/elboletaire)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/elboletaire/password-strength-meter/issues"
+  },
+  "homepage": "https://github.com/elboletaire/password-strength-meter#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-chmod": "^2.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-uglify": "^2.1.0",
+    "istanbul": "^0.4.5",
+    "jquery": "^3.1.1",
+    "jsdom": "^9.11.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "jquery": ">=1.14.0"
+  },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "src/example.png"
+  ]
+}
