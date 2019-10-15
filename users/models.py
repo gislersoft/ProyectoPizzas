@@ -19,7 +19,7 @@ class User(AbstractBaseUser):
     FRANCHISE = "Franquicia"
     DEFAULT_AVATAR = "images/profile.png"
 
-    USER_TYPES = ((ADMINISTRATOR,ADMINISTRATOR),(FRANCHISE, FRANCHISE))
+    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (FRANCHISE, FRANCHISE))
 
     email = models.EmailField("Correo Electrónico", blank=True, unique=True)
     first_name = models.CharField("Nombres", max_length=150, blank=True)
@@ -29,10 +29,10 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField("Activo?", default=True)
     date_joined = models.DateTimeField("Fecha de Registro", default=timezone.now)
     avatar = models.ImageField(
-        verbose_name="Imagen", upload_to=avatar_path, blank=True, null=True
+            verbose_name="Imagen", upload_to=avatar_path, blank=True, null=True
     )
     user_type = models.CharField(
-        "Tipo de Usuario", max_length=50, choices=USER_TYPES, null=True, blank=True
+            "Tipo de Usuario", max_length=50, choices=USER_TYPES, null=True, blank=True
     )
 
     EMAIL_FIELD = "email"
@@ -48,7 +48,7 @@ class User(AbstractBaseUser):
     @classmethod
     def initial_user(cls, email="admin@admin.co", password="superpizzas"):
         if not User.objects.count():
-            user =User.objects.create(
+            user = User.objects.create(
                     email=email,
                     is_active=True,
             )

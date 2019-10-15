@@ -1,0 +1,43 @@
+
+body, #content-container {
+    color: #040404;
+}
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  width: 100% !important;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.img-user {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  transform: translateY(50%);
+}
+
+/* NAVBAR  */
+/*======================================*/
+.navbar-top-links > li > a {
+  display: table-cell;
+  padding: 0 8px;
+  vertical-align: baseline;
+  height: 59px;
+  color: #dbdbdb;
+  transition: all 0.4s;
+}
+
+.navbar-top-links .tgl-menu-btn>a, .navbar-top-links .tgl-menu-btn>a:hover, .navbar-top-links .tgl-menu-btn>a:focus {
+    vertical-align: middle;
+}
+
+li.tgl-menu-btn {
+  bottom: 0;
+}

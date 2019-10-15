@@ -14,7 +14,7 @@ class Topping(models.Model):
 
     name = models.CharField("Nombre", max_length=250)
     image = models.ImageField(
-        verbose_name="Imagen", upload_to=topping_image_path, blank=True, null=True
+            verbose_name="Imagen", upload_to=topping_image_path, blank=True, null=True
     )
 
     @property
@@ -32,7 +32,7 @@ def pizza_image_path(instance, filename):
 class Pizza(models.Model):
     DEFAULT_IMAGE = "images/pizza_default.png"
     image = models.ImageField(
-        verbose_name="Imagen", upload_to=pizza_image_path, blank=True, null=True
+            verbose_name="Imagen", upload_to=pizza_image_path, blank=True, null=True
     )
     toppings = models.ManyToManyField(Topping, related_name="pizzas")
     price = models.FloatField(verbose_name="Precio")
