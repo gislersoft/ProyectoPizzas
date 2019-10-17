@@ -19,7 +19,6 @@ def end_sessions(request):
 def Start(request):
     #User.initial_user()
     if request.tenant.schema_name == "public":
-        Plan.create_init_plans()
         return render(
             request,
             "public_view/public_init.html",

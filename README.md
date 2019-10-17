@@ -41,7 +41,7 @@ Recuerda agregar los criterios de aceptación a las  historias de usuario.
 
 Ubicarse en la carpeta raíz del repositorio
 
-1)Instalar los requerimientos pip3 install -r requirements.pip
+1)Instalar los requerimientos pip3 install -r requirements.txt
 
 2)Crear una base de datos para el proyecto y actualizar la configuración de BD en env/secrets.env
 
