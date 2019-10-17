@@ -46,7 +46,7 @@ class Plan(models.Model):
 
 def check_schema_name(name):
     if not _is_valid_schema_name(name):
-        raise ValidationError("El name del esquema es inválido.")
+        raise ValidationError("El nombre del esquema es inválido.")
 
 
 class Franchise(TenantMixin):
