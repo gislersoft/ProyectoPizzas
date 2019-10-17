@@ -8,6 +8,7 @@
     <span class="menu-title">Inicio</span>
   </a>
 </li>
+{% if request.tenant.schema_name == "public" %}
 
 
 {% url 'plan_management' as plan_management %}
@@ -27,3 +28,6 @@
     </li>
   </ul>
 </li>
+
+
+{% endif %}
