@@ -24,7 +24,7 @@ def register_franchise(request, plan_id=1):
 
             franchise = form.save()
             domain = Domain(
-                domain = f"{franchise.schema_name}{settings.DOMAIN}",
+                domain = f"{franchise.schema_name}.{settings.DOMAIN}",
                 is_primary = True,
                 tenant = franchise,
             )
