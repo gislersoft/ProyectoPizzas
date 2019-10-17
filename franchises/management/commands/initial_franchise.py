@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from franchises.models import  Franchise
+from franchises.models import Franchise
 
 
 class Command(BaseCommand):

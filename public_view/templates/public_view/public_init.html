@@ -1,0 +1,43 @@
+{% extends "landing_base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class=" panel panel-primary">
+                <div class="panel-body">
+                    <div class="row pricing pricing-no-gutter-sm">
+                        {% for plan in plans %}
+                                <div class="col-sm-4">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <p class="pricing-title">{{ plan.name }}</p>
+                                            <p class="pricing-desc">{{ plan.description|default_if_none:"-" }}</p>
+                                            <div class="pricing-price">
+                                                <p><span class="text-semibold text-primary">${{ plan.price }}</span></p>
+                                            </div>
+                                            <ul class="pricing-list">
+                                                <li>Registre un máximo de <strong>{{ plan.max_users }}</strong> usuarios</li>
+                                                <li>Módulos de <strong>{{ plan.get_allowed_modules }}</strong> para uso ilimitado</li>
+                                                <li><strong>Personalice </strong>el diseño del sistema a sus necesidades</li>
+                                            </ul>
+                                            <a href="{% url 'franchise_register_franchise' plan.id %} " class="btn btn-block btn-purple btn-lg">Seleccionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

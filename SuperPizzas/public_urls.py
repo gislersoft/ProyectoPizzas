@@ -17,14 +17,29 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
+<<<<<<< HEAD
+=======
+from django.conf.urls import url
+>>>>>>> 15fc4f02ba59030d48e8ff5a91322833e22e4ea7
 
-#Test
+# Test
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name ="base.html"), name="home"),
-    path("test-base", TemplateView.as_view(template_name ="base.html"), name="test_base"),
-    path("test-table", TemplateView.as_view(template_name ="tables_base.html"), name="test_table"),
-    path("test-landing", TemplateView.as_view(template_name ="landing_base.html"), name="test_landing"),
+    url(r"^", include("public_view.urls")),
     url(r"^users/", include("users.urls")),
+    url(r"^franchises/", include("franchises.urls")),
+    path(
+        "test-base", TemplateView.as_view(template_name="base.html"), name="test_base"
+    ),
+    path(
+        "test-table",
+        TemplateView.as_view(template_name="tables_base.html"),
+        name="test_table",
+    ),
+    path(
+        "test-landing",
+        TemplateView.as_view(template_name="landing_base.html"),
+        name="test_landing",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
