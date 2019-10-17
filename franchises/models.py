@@ -20,15 +20,18 @@ class Module(models.Model):
     def __str__(self):
         return self.name
 
+
 class Plan(models.Model):
     name = models.CharField(max_length=100, verbose_name="nombre")
-    description = models.CharField(max_length=1000, verbose_name="descripción", blank=True, null=True)
+    description = models.CharField(
+        max_length=1000, verbose_name="descripción", blank=True, null=True
+    )
     price = models.PositiveIntegerField(verbose_name="precio")
     modules = models.ManyToManyField(Module, verbose_name="modulos")
     max_users = models.PositiveIntegerField(verbose_name="máximo de usuarios")
 
     class Meta:
-        ordering = ['price']
+        ordering = ["price"]
 
     def __str__(self):
         return self.name
@@ -59,27 +62,34 @@ class Franchise(TenantMixin):
         verbose_name="Cliente de la franquicia",
         related_name="franchises",
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
     )
-    plan = models.ForeignKey(Plan, related_name="franchises", on_delete=models.SET_NULL, null=True)
+    plan = models.ForeignKey(
+        Plan, related_name="franchises", on_delete=models.SET_NULL, null=True
+    )
     validity = models.DateTimeField(
         help_text="Fecha hasta la que se encuentra pago el servicio"
     )
 
     def __str__(self):
         return self.name
-    
+
     @classmethod
     def initial_franchise(cls):
         client = User.initial_user()
         Module.initial_modules()
         if not Franchise.objects.count():
-            franchise = Franchise.objects.create(name="public",schema_name="public",validity="2099-12-31")
-            dominio = Domain.objects.create(tenant=franchise, is_primary=True, domain=settings.DOMAIN)
+            franchise = Franchise.objects.create(
+                name="public", schema_name="public", validity="2099-12-31"
+            )
+            dominio = Domain.objects.create(
+                tenant=franchise, is_primary=True, domain=settings.DOMAIN
+            )
 
             print("Franquicia inicial creada correctamente")
         else:
             print("Ya existe una franquicia")
+
 
 class Domain(DomainMixin):
     history = HistoricalRecords()

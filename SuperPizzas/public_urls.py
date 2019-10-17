@@ -18,13 +18,23 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf.urls import url
 
-#Test
+# Test
 from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r"^", include("public_view.urls")),
     url(r"^franchises/", include("franchises.urls")),
-    path("test-base", TemplateView.as_view(template_name ="base.html"), name="test_base"),
-    path("test-table", TemplateView.as_view(template_name ="tables_base.html"), name="test_table"),
-    path("test-landing", TemplateView.as_view(template_name ="landing_base.html"), name="test_landing"),
+    path(
+        "test-base", TemplateView.as_view(template_name="base.html"), name="test_base"
+    ),
+    path(
+        "test-table",
+        TemplateView.as_view(template_name="tables_base.html"),
+        name="test_table",
+    ),
+    path(
+        "test-landing",
+        TemplateView.as_view(template_name="landing_base.html"),
+        name="test_landing",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

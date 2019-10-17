@@ -8,27 +8,84 @@ import users.models
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-                name='User',
-                fields=[
-                    ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                    ('password', models.CharField(max_length=128, verbose_name='password')),
-                    ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                    ('email', models.EmailField(blank=True, max_length=254, unique=True, verbose_name='Correo Electrónico')),
-                    ('first_name', models.CharField(blank=True, max_length=150, verbose_name='Nombres')),
-                    ('last_name', models.CharField(blank=True, max_length=150, verbose_name='Apellidos')),
-                    ('is_staff', models.BooleanField(default=False, verbose_name='Staff?')),
-                    ('is_active', models.BooleanField(default=True, verbose_name='Activo?')),
-                    ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Fecha de Registro')),
-                    ('avatar', models.ImageField(blank=True, null=True, upload_to=users.models.avatar_path, verbose_name='Imagen')),
-                    ('user_type', models.CharField(blank=True, choices=[('Administrador', 'Administrador'), ('Franquicia', 'Franquicia')], max_length=50, null=True, verbose_name='Tipo de Usuario')),
-                ],
-                options={
-                    'abstract': False,
-                },
-        ),
+            name="User",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        blank=True,
+                        max_length=254,
+                        unique=True,
+                        verbose_name="Correo Electrónico",
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="Nombres"
+                    ),
+                ),
+                (
+                    "last_name",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="Apellidos"
+                    ),
+                ),
+                ("is_staff", models.BooleanField(default=False, verbose_name="Staff?")),
+                (
+                    "is_active",
+                    models.BooleanField(default=True, verbose_name="Activo?"),
+                ),
+                (
+                    "date_joined",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        verbose_name="Fecha de Registro",
+                    ),
+                ),
+                (
+                    "avatar",
+                    models.ImageField(
+                        blank=True,
+                        null=True,
+                        upload_to=users.models.avatar_path,
+                        verbose_name="Imagen",
+                    ),
+                ),
+                (
+                    "user_type",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("Administrador", "Administrador"),
+                            ("Franquicia", "Franquicia"),
+                        ],
+                        max_length=50,
+                        null=True,
+                        verbose_name="Tipo de Usuario",
+                    ),
+                ),
+            ],
+            options={"abstract": False},
+        )
     ]

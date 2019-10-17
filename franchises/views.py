@@ -28,7 +28,11 @@ def plan_management(request, plan_id=None):
         else:
             messages.error(request, "Por favor revise los campos en rojo")
 
-    return render(request, "franchises/plan_management.html", {'form': form, 'plans': Plan.objects.all()})
+    return render(
+        request,
+        "franchises/plan_management.html",
+        {"form": form, "plans": Plan.objects.all()},
+    )
 
 
 # @verify_position(allowed_position=["Administrador"])
@@ -46,9 +50,9 @@ def register_franchise(request, plan_id=1):
 
             franchise = form.save()
             domain = Domain(
-                    domain=f"{franchise.schema_name}.{settings.DOMAIN}",
-                    is_primary=True,
-                    tenant=franchise,
+                domain=f"{franchise.schema_name}.{settings.DOMAIN}",
+                is_primary=True,
+                tenant=franchise,
             )
             domain.save()
             # connection.set_tennant(franchise)
@@ -61,21 +65,20 @@ def register_franchise(request, plan_id=1):
             return redirect("franchise_register_franchise")
         else:
             messages.error(
-                    request,
-                    "No se pudo registrar la franquicia, contacte al soporte"
+                request, "No se pudo registrar la franquicia, contacte al soporte"
             )
     else:
         form = FranchiseForm()
 
     return render(
-            request,
-            "franchises/registry_franchises.html",
-            {
-                "form": form,
-                "title": "Franchise registry",
-                "domains": Domain.objects.exclude(tenant__schema_name="public")
-                    .select_related("tenant")
-                    .all(),
-                "domain": settings.DOMAIN,
-            },
+        request,
+        "franchises/registry_franchises.html",
+        {
+            "form": form,
+            "title": "Franchise registry",
+            "domains": Domain.objects.exclude(tenant__schema_name="public")
+            .select_related("tenant")
+            .all(),
+            "domain": settings.DOMAIN,
+        },
     )

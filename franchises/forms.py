@@ -8,22 +8,23 @@ class FranchiseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         from django.conf import settings
 
-        super(FranchiseForm, self).__init__(*args,**kwargs)
+        super(FranchiseForm, self).__init__(*args, **kwargs)
         self.fields["schema_name"].label = "System subdomain"
-        self.fields["schema_name"].help_text = (
-            f"Esta será su dirección: midireccion{settings.DOMAIN}"
-        )
-        #self.fields["client"].queryset = self.fields["client"]\
+        self.fields[
+            "schema_name"
+        ].help_text = f"Esta será su dirección: midireccion{settings.DOMAIN}"
+        # self.fields["client"].queryset = self.fields["client"]\
         #    .queryset.filter(position="Client")
+
     class Meta:
         model = Franchise
         exclude = ("theme", "colour")
         widgets = {
-            "validity" : forms.DateInput(
-                attrs = {"class" : "component-date"},
-                format = "%Y-%m-%d"
+            "validity": forms.DateInput(
+                attrs={"class": "component-date"}, format="%Y-%m-%d"
             )
         }
+
     def clean(self):
         form_data = self.cleaned_data
         tenant_address = form_data["schema_name"]

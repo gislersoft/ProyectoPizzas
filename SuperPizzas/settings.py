@@ -77,7 +77,7 @@ TENANT_MODEL = "franchises.Franchise"  # app.Model
 TENANT_DOMAIN_MODEL = "franchises.Domain"  # app.Model
 
 MIDDLEWARE = [
-    'django_tenants.middleware.main.TenantMainMiddleware',
+    "django_tenants.middleware.main.TenantMainMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -87,13 +87,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'SuperPizzas.tenant_urls'
-PUBLIC_SCHEMA_URLCONF = 'SuperPizzas.public_urls'
+ROOT_URLCONF = "SuperPizzas.tenant_urls"
+PUBLIC_SCHEMA_URLCONF = "SuperPizzas.public_urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -137,9 +137,7 @@ DATABASES = {
     }
 }
 
-DATABASE_ROUTERS = (
-    'django_tenants.routers.TenantSyncRouter',
-)
+DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
