@@ -11,6 +11,11 @@ from users.models import User
 class Module(models.Model):
     name = models.CharField(max_length=100)
 
+    @staticmethod
+    def initual_modules():
+        Module.objects.get_or_create(name="Usuarios")
+        Module.objects.get_or_create(name="Pizzas")
+
     def __str__(self):
         return self.name
 
@@ -56,6 +61,7 @@ class Franchise(TenantMixin):
     @classmethod
     def initial_franchise(cls):
         client = User.initial_user()
+        Module.initual_modules()
         if not Franchise.objects.count():
             franchise = Franchise.objects.create(name="public",schema_name="public",validity="2099-12-31")
             dominio = Domain.objects.create(tenant=franchise, is_primary=True, domain=settings.DOMAIN)

@@ -42,6 +42,8 @@ SHARED_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "bootstrap3",
+    "django_select2",
     "franchises",
     "users",
 )
@@ -55,6 +57,8 @@ TENANT_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "bootstrap3",
+    "django_select2",
     "pizzas",
     "users",
 )
