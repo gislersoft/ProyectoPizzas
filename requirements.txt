@@ -5,6 +5,8 @@ pep8==1.7.1
 pyflakes==2.1.1
 pytz==2019.2
 sqlparse==0.3.0
+flake8==3.7.8
+black==19.3b0
 
 # Cualquier otra libreria que necesite el projecto
 
@@ -12,3 +14,7 @@ python-dotenv==0.10.3
 psycopg2==2.8.3
 django-tenants==2.2.3
 Pillow==6.1.0
+django-select2==7.1.1
+django-bootstrap3==11.1.0
+django-simple-history==2.7.3
+pre-commit==1.18.3
