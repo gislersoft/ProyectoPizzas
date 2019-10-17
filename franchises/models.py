@@ -21,10 +21,10 @@ class Module(models.Model):
 
 
 class Plan(models.Model):
-    name = models.CharField(max_length=100)
-    price = models.PositiveIntegerField()
-    modules = models.ManyToManyField(Module)
-    max_users = models.PositiveIntegerField()
+    name = models.CharField(max_length=100, verbose_name="nombre")
+    price = models.PositiveIntegerField(verbose_name="precio")
+    modules = models.ManyToManyField(Module, verbose_name="modulos")
+    max_users = models.PositiveIntegerField(verbose_name="máximo de usuarios")
 
     def __str__(self):
         return self.name
