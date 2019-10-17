@@ -8,3 +8,9 @@
     <span class="menu-title">Inicio</span>
   </a>
 </li>
+<li class="{% if users_listado in request.path %} active {% endif %}">
+  <a href="{{ users_listado }}">
+    <i class="ti-user"></i>
+    <span class="menu-title">Usuarios</span>
+  </a>
+</li>
