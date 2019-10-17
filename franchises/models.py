@@ -13,7 +13,7 @@ class Module(models.Model):
     name = models.CharField(max_length=100)
 
     @staticmethod
-    def initual_modules():
+    def initial_modules():
         Module.objects.get_or_create(name="Usuarios")
         Module.objects.get_or_create(name="Pizzas")
 
@@ -22,9 +22,13 @@ class Module(models.Model):
 
 class Plan(models.Model):
     name = models.CharField(max_length=100, verbose_name="nombre")
+    description = models.CharField(max_length=1000, verbose_name="descripción", blank=True, null=True)
     price = models.PositiveIntegerField(verbose_name="precio")
     modules = models.ManyToManyField(Module, verbose_name="modulos")
     max_users = models.PositiveIntegerField(verbose_name="máximo de usuarios")
+
+    class Meta:
+        ordering = ['price']
 
     def __str__(self):
         return self.name
@@ -68,7 +72,7 @@ class Franchise(TenantMixin):
     @classmethod
     def initial_franchise(cls):
         client = User.initial_user()
-        Module.initual_modules()
+        Module.initial_modules()
         if not Franchise.objects.count():
             franchise = Franchise.objects.create(name="public",schema_name="public",validity="2099-12-31")
             dominio = Domain.objects.create(tenant=franchise, is_primary=True, domain=settings.DOMAIN)

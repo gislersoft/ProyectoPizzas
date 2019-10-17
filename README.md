@@ -41,7 +41,11 @@ Recuerda agregar los criterios de aceptación a las  historias de usuario.
 
 Ubicarse en la carpeta raíz del repositorio
 
-1)Instalar los requerimientos pip3 install -r requirements.pip
+1)Instalar los requerimientos pip3 install -r requirements.txt
+
+1.1)Configurar hooks del repositorio: (https://ljvmiranda921.github.io/notebook/2018/06/21/precommits-using-black-and-flake8/)
+
+Ejecutar: pre-commit install
 
 2)Crear una base de datos para el proyecto y actualizar la configuración de BD en env/secrets.env
 

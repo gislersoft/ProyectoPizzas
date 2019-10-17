@@ -4,7 +4,6 @@ from django_select2.forms import Select2MultipleWidget
 from .models import *
 
 
-
 class FranchiseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         from django.conf import settings
@@ -53,5 +52,5 @@ class FranchiseForm(forms.ModelForm):
 class PlanForm(forms.ModelForm):
     class Meta:
         model = Plan
-        fields = ("name", "price", "modules", "max_users")
+        fields = ("name", "description", "price", "modules", "max_users")
         widgets = {"modules": Select2MultipleWidget()}
