@@ -1,0 +1,95 @@
+{% extends "landing_base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class=" panel panel-primary">
+                <div class="panel-body">
+                    <div class="row pricing pricing-no-gutter-sm">
+                        {% for plan in plans %}
+                            {% if plan.name == "Gratuito" %}
+                                <!--===================================================-->
+
+                                <div class="col-sm-4">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <p class="pricing-title">{{ plan.name }}</p>
+                                            <p class="pricing-desc">Pruebe nuestro sistema de manera gratuita.</p>
+                                            <div class="pricing-price">
+                                                <p><span class="text-semibold text-primary">${{ plan.price }}</span></p>
+                                            </div>
+                                            <ul class="pricing-list">
+                                                <li>Registre un máximo de <strong>{{ plan.max_users }}</strong> usuarios</li>
+                                                <li>Módulos de <strong>{{ plan.get_allowed_modules }}</strong> para uso ilimitado</li>
+                                                <li><strong>Personalice </strong>el diseño del sistema a sus necesidades</li>
+                                            </ul>
+                                            <a href="{% url 'franchise_register_franchise' plan.id %} " class="btn btn-block btn-purple btn-lg">Seleccionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--===================================================-->
+
+                            {% elif plan.name == "Estandar" %}
+                                <!--Premium Plan-->
+                                <!--===================================================-->
+                                <div class="col-sm-4 pricing-featured">
+                                    <div class="panel">
+                                        <div class="ribbon"><span>Mas vendido</span></div>
+                                        <div class="panel-body">
+                                            <p class="pricing-title">{{ plan.name }}</p>
+                                            <p class="pricing-desc">Disfrute de nuestro sistema sistema sin limitaciones funcionales</p>
+                                            <div class="pricing-price">
+                                                <p><span class="text-semibold text-success">${{ plan.precio }}</span></p>
+                                                <p>/Mes</p>
+                                            </div>
+                                            <ul class="pricing-list">
+                                                <li>Registre un máximo de <strong>{{ plan.maximo_usuarios }}</strong> usuarios</li>
+                                                <li>Incluye todos los módulos de la versión gratuita y el módulo especializado <strong>Reportes</strong> para uso ilimitado</li>
+                                                <li><strong>Personalice </strong>el diseño del sistema a sus necesidades</li>
+                                            </ul>
+                                            <a href="{% url 'franchise_register_franchise' plan.id %} " class="btn btn-block btn-purple btn-lg">Seleccionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% elif plan.name == "Empresarial" %}
+                                <!--Enterprise Plan-->
+                                <!--===================================================-->
+                                <div class="col-sm-4">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <p class="pricing-title">{{ plan.name }}</p>
+                                            <p class="pricing-desc">Disfrute al máximo de nuestro sistema.</p>
+                                            <div class="pricing-price">
+                                                <p><span class="text-semibold text-purple">${{ plan.price }}</span></p>
+                                                <p>/Mes</p>
+                                            </div>
+                                            <ul class="pricing-list">
+                                                <li>Registre un máximo de <strong>{{ plan.maximo_usuarios }}</strong> usuarios</li>
+                                                <li>Incluye <strong>todos</strong> los módulos {{ plan.get_allowed_modules }} para uso ilimitado</li>
+                                                <li><strong>Personalice </strong>el diseño del sistema a sus necesidades</li>
+                                            </ul>
+                                            <a href="{% url 'franchise_register_franchise' plan.id %} " class="btn btn-block btn-purple btn-lg">Seleccionar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--===================================================-->
+
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

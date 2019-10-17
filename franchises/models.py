@@ -3,6 +3,7 @@ from django.db import models
 from django_tenants.models import DomainMixin, TenantMixin
 from django_tenants.postgresql_backend.base import _is_valid_schema_name
 
+from simple_history.models import HistoricalRecords
 from django.conf import settings
 
 from users.models import User
@@ -19,7 +20,6 @@ class Module(models.Model):
     def __str__(self):
         return self.name
 
-
 class Plan(models.Model):
     name = models.CharField(max_length=100, verbose_name="nombre")
     price = models.PositiveIntegerField(verbose_name="precio")
@@ -29,13 +29,20 @@ class Plan(models.Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def search(id):
+        try:
+            return Plan.objects.get(id=id)
+        except Plan.DoesNotExist:
+            return None
+
     def get_avalaible_modules(self):
         return [str(module) for module in self.modules.all()]
 
 
 def check_schema_name(name):
     if not _is_valid_schema_name(name):
-        raise ValidationError("El nombre del esquema es inválido.")
+        raise ValidationError("El name del esquema es inválido.")
 
 
 class Franchise(TenantMixin):
@@ -66,9 +73,9 @@ class Franchise(TenantMixin):
             franchise = Franchise.objects.create(name="public",schema_name="public",validity="2099-12-31")
             dominio = Domain.objects.create(tenant=franchise, is_primary=True, domain=settings.DOMAIN)
 
-            print("Franquicia inicial creata correctamente")
+            print("Franquicia inicial creada correctamente")
         else:
             print("Ya existe una franquicia")
 
 class Domain(DomainMixin):
-    pass
+    history = HistoricalRecords()
