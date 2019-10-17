@@ -16,11 +16,14 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
+from django.conf.urls import url, include
 
 #Test
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    url(r"^", include("public_view.urls")),
+    url(r"^franchises/", include("franchises.urls")),
     path("", TemplateView.as_view(template_name ="base.html"), name="home"),
     path("test-base", TemplateView.as_view(template_name ="base.html"), name="test_base"),
     path("test-table", TemplateView.as_view(template_name ="tables_base.html"), name="test_table"),

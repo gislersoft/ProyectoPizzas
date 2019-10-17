@@ -1,10 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "tables_base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block title%}
+    Solicitar creación de empresa
+{% endblock title%}
+
+{% block page_title %}
+    Solicitar creación de empresa
+{% endblock page_title %}
+
+{% block panel_title %}
+    Solicitar creación de franquicia
+{% endblock panel_title %}
+
+{% block miga_pan %}
+    <li class="active">Creación de franquicia</li>
+{% endblock miga_pan %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4 col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-control">
+
+                    </div>
+                    <h3 class="panel-title">Creación de franquicia</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-vertical" method="POST">{% csrf_token %}
+                        {% bootstrap_form form layout="vertical" %}
+                        <div class="col-xs-12" align="right">
+                            <a href="{% url 'inicio' %}" class="btn btn-dark">Volver </a>
+                            <button type="submit" class="btn btn-primary">
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block  js %}
+    {{ block.super }}
+    <script>
+        dominio = '{{ domain|safe }}';
+        $id_schema_name = $('#id_schema_name');
+        $help_text = $id_schema_name.next();
+        console.log($help_text.html());
+        console.log(domain);
+        if ($help_text.html() !== 'Esta será su direccion: midireccion'+domain){
+            $help_text = $help_text.next();
+        }
+
+        $id_schema_name.on('change keydown paste input',function () {
+            address = $id_schema_name.val();
+
+            $help_text.html('Esta será su direccion: '+address+domain);
+        });
+        $id_schema_name.trigger('change');
+
+    </script>
+
+    <script>
+        static = {% static '' %};
+        function get_theme_link(){
+            return static+"css/themes/type-"+$("#id_theme").val()+"/theme-"+$("#id_colour").val()+".min.css"
+        }
+
+
+        $('#id_theme, #id_colour').on('change',function () {
+            $('#app-theme').attr("href",get_theme_link())
+        })
+    </script>
+
+    <script src="{% static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js' %}"></script>
+    <script>
+        $('.component-date').datepicker({
+            language: 'es',
+            autoclose: true,
+            format: 'yyyy-mm-dd',
+            orientation: "bottom",
+        });
+    </script>
+{% endblock %}

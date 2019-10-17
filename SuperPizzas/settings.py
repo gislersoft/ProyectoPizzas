@@ -33,6 +33,10 @@ AUTH_USER_MODEL = "users.User"
 # Application definition
 
 SHARED_APPS = (
+    "public_view",
+    "bootstrap3",
+    "django_select2",
+    "simple_history",
     "django_tenants",
     "django.contrib.contenttypes",
     "django.contrib.auth",
@@ -48,6 +52,9 @@ SHARED_APPS = (
 
 
 TENANT_APPS = (
+    "bootstrap3",
+    "django_select2",
+    "simple_history",
     "django.contrib.contenttypes",
     "django.contrib.auth",
     "django_jenkins",
