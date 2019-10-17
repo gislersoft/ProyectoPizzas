@@ -3,7 +3,7 @@ import os
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 from django.utils.functional import cached_property
 
@@ -13,8 +13,30 @@ def avatar_path(instance, filename):
 
     return "/".join(["users", str(instance.id), f"avatar{file_extension}"])
 
+class customManager(BaseUserManager):
+    def create_user(self, email, password, first_name, last_name):
+        user = User.objects.create(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_active=True,
+            )
+        user.set_password(password)
+        user.save()
+
+    def create_superuser(self, email, password, first_name, last_name):
+        user = User.objects.create(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_active=True,
+            )
+        user.set_password(password)
+        user.save()
 
 class User(AbstractBaseUser):
+    objects = customManager()
+
     ADMINISTRATOR = "Administrador"
     FRANCHISE = "Franquicia"
     DEFAULT_AVATAR = "images/profile.png"
