@@ -17,10 +17,7 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
-<<<<<<< HEAD
-=======
 from django.conf.urls import url
->>>>>>> 15fc4f02ba59030d48e8ff5a91322833e22e4ea7
 
 # Test
 from django.views.generic import TemplateView
