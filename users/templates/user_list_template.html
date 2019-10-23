@@ -4,13 +4,13 @@
 
 {% block breadcrumb %}
   <li><a href="#">Home</a></li>
-  <li><a href="#">Usuarios</a></li>
-  <li class="active">Listado</li>
+  <li><a href="#">Gestión de Usuarios</a></li>
+  <li class="active">Lista de Usuarios</li>
 {% endblock breadcrumb %}
 
 {% block panel_body%}
     <div class="table-responsive">
-        <table class="table table-striped table-bordered tabla-responsive ">
+        <table class="table table-striped table-bordered">
             <thead>
             {% for header in headers_list %}
                 <th>{{ header }}</th>

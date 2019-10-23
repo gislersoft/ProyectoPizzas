@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.views.generic import (
     ListView
 )
@@ -22,8 +20,6 @@ class UsersList(ListView):
             "Nombre completo",
             "Es staff",
             "Estado",
-            "Fecha de Activación",
-            "Opciones",
+            "Fecha de Activación"
         ]
-
         return context
