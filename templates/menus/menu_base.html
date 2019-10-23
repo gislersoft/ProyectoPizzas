@@ -33,7 +33,7 @@
 {% endif %}
 
 <li class="{% if users_listado in request.path %} active {% endif %}">
-  <a href="{{ users_listado }}">
+  <a href="{% url 'users_list' %}">
     <i class="ti-user"></i>
     <span class="menu-title">Gestión de Usuarios</span>
   </a>
