@@ -1,3 +1,29 @@
-from django.shortcuts import render
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import *
+from .models import *
 
-# Create your views here.
+
+def register_user_admin(request):
+    if request.method == "POST":
+
+        form = UserForm(request.POST)
+
+        if form.is_valid():
+
+            user = form.save()
+            messages.success(request, "El usuario ha sido creada exitosamente")
+            return redirect("register_user_admin")
+        else:
+            messages.error(
+                request, "No se pudo registrar al usuario, contacte al soporte"
+            )
+    else:
+        form = UserForm()
+
+    return render(
+        request,
+        "users/register_user_admin.html",
+        {"form": form, "title": "User registration", "domain": settings.DOMAIN},
+    )

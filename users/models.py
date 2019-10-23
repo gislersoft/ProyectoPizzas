@@ -16,10 +16,11 @@ def avatar_path(instance, filename):
 
 class User(AbstractBaseUser):
     ADMINISTRATOR = "Administrador"
-    FRANCHISE = "Franquicia"
+    DIGITIZER = "Digitador"
+    USER = "Usuario"
     DEFAULT_AVATAR = "images/profile.png"
 
-    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (FRANCHISE, FRANCHISE))
+    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (DIGITIZER, DIGITIZER), (USER, USER))
 
     email = models.EmailField("Correo Electrónico", blank=True, unique=True)
     first_name = models.CharField("Nombres", max_length=150, blank=True)
@@ -27,7 +28,7 @@ class User(AbstractBaseUser):
 
     is_staff = models.BooleanField("Staff?", default=False)
     is_active = models.BooleanField("Activo?", default=True)
-    date_joined = models.DateTimeField("Fecha de Registro", default=timezone.now)
+    date_joined = models.DateTimeField(auto_now_add=True, auto_now=False)
     avatar = models.ImageField(
         verbose_name="Imagen", upload_to=avatar_path, blank=True, null=True
     )
