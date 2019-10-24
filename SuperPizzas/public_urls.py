@@ -18,10 +18,6 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf.urls import url
 
-from django.contrib.auth import views as auth_views
-
-#from users import views
-
 #Test
 from django.views.generic import TemplateView
 
