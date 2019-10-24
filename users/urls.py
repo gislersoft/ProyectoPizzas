@@ -5,5 +5,6 @@ from django.conf.urls import url
 from .views import *
 
 urlpatterns = [
-    path("register-user-admin/", register_user_admin, name="register_user_admin")
+    path("register-user-admin/", register_user_admin, name="register_user_admin"),
+    url(r"^list", UsersList.as_view(), name="users_list"),
 ]

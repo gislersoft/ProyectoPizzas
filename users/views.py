@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import *
 from .models import *
+from django.views.generic import ListView
 
 
 def register_user_admin(request):
@@ -27,3 +28,24 @@ def register_user_admin(request):
         "users/register_user_admin.html",
         {"form": form, "title": "User registration", "domain": settings.DOMAIN},
     )
+
+
+class UsersList(ListView):
+    model = User
+    template_name = "user_list_template.html"
+    context_object_name = "users_list"
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(UsersList, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(UsersList, self).get_context_data(**kwargs)
+        context["title"] = "Listado de usuarios"
+        context["headers_list"] = [
+            "Email",
+            "Nombre completo",
+            "Es staff",
+            "Estado",
+            "Fecha de Activación"
+        ]
+        return context
