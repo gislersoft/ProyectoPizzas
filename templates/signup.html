@@ -1,22 +1,39 @@
-<h2>Registro en SuperPizzas</h2>
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Regisro - SuperPizzas!</title>
 
-<a href="{% url 'home_test' %}">Inicio</a> / 
-<a href="{% url 'login' %}">Entrar</a>
+		<!--Bootstrap Stylesheet [ REQUIRED ]-->
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-<h2>Registro</h2>
-<form method="post">
-	{% csrf_token %}
-	{% for field in form %}
-	<p>
-		{{ field.label_tag }}<br/>
-		{{ field }}
-		{% if field.help_text %}
-			<small style="color: green">{{ field.help_text }}</small>
-		{% endif %}
-		{% for error in field.errors %}
-			<p style="color: red">{{ error }}</p>
-		{% endfor %}
-	</p>
-	{% endfor %}
-	<button type="submit">Registrarse</button>
-</form>
+	</head>
+
+	<body style="background-color: #2cb5e8; padding: 2%;">
+		<div style="background-color: white; border-radius: 25px; padding: 1%; width: 27%; margin: auto;">
+			<h1 style="color: #19799c;">Registro en SuperPizzas</h1>
+			<br>
+
+			<h5><a href="{% url 'home_test' %}">Inicio</a> / 
+			<a href="{% url 'login' %}">Entrar</a></h5>
+			<br>
+
+			<form method="post">
+				{% csrf_token %}
+				{% for field in form %}
+				<p>
+					{{ field.label_tag }}<br/>
+					{{ field }}
+					{% if field.help_text %}
+						<small style="color: green">{{ field.help_text }}</small>
+					{% endif %}
+					{% for error in field.errors %}
+						<p style="color: red">{{ error }}</p>
+					{% endfor %}
+				</p>
+				{% endfor %}
+				<button type="submit" class="btn btn-primary">Registrarse</button>
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,11 +1,28 @@
-<h2>¡Entrar a SuperPizzas!</h2>
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Regisro - SuperPizzas!</title>
 
-<a href="{% url 'home_test' %}">Inicio</a> / 
-<a href="{% url 'signup' %}">Registrarse</a>
+		<!--Bootstrap Stylesheet [ REQUIRED ]-->
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-<h2>Entrar</h2>
-<form method="post">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit">Entrar</button>
-</form>
+	</head>
+
+	<body style="background-color: #2cb5e8; padding: 2%;">
+		<div style="background-color: white; border-radius: 25px; padding: 1%; width: 27%; margin: auto;">
+			<h1 style="color: #19799c;">¡Entrar a SuperPizzas!</h1>
+			<br>
+
+			<h5><a href="{% url 'home_test' %}">Inicio</a> / 
+			<a href="{% url 'signup' %}">Registrarse</a></h5>
+			<br>
+
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="btn btn-primary">Entrar</button>
+			</form>
+		</div>
+	</body>
+</html>
