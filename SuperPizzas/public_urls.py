@@ -15,22 +15,20 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls import url
 
 from django.contrib.auth import views as auth_views
 
-from users import views
+#from users import views
 
 #Test
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    url(r"^users/", include("users.urls")),
     path("", TemplateView.as_view(template_name ="base.html"), name="home"),
     path("test-base", TemplateView.as_view(template_name ="base.html"), name="test_base"),
     path("test-table", TemplateView.as_view(template_name ="tables_base.html"), name="test_table"),
     path("test-landing", TemplateView.as_view(template_name ="landing_base.html"), name="test_landing"),
-    path('home-test', TemplateView.as_view(template_name ="home_test.html"), name="home_test"),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('signup/', views.signup, name='signup'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
