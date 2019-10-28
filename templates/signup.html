@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html style="background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); background-size: cover; height: 100%;">
 	<head>
 		<title>Regisro - SuperPizzas!</title>
 
@@ -9,12 +9,12 @@
 
 	</head>
 
-	<body style="background-color: #2cb5e8; padding: 2%;">
+	<body style="padding: 2%; background: rgba(0,0,0,0);">
 		<div style="background-color: white; border-radius: 25px; padding: 1%; width: 27%; margin: auto;">
-			<h1 style="color: #19799c;">Registro en SuperPizzas</h1>
+			<h1 class="text-primary text-center">Registro en SuperPizzas</h1>
 			<br>
 
-			<h5><a href="{% url 'home_test' %}">Inicio</a> / 
+			<h5 class="text-primary text-center"><a href="{% url 'home_test' %}">Inicio</a> / 
 			<a href="{% url 'login' %}">Entrar</a></h5>
 			<br>
 
@@ -32,7 +32,7 @@
 					{% endfor %}
 				</p>
 				{% endfor %}
-				<button type="submit" class="btn btn-primary">Registrarse</button>
+				<button type="submit" class="btn btn-primary center-block">Registrarse</button>
 			</form>
 		</div>
 	</body>
