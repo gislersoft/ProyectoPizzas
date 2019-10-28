@@ -27,7 +27,7 @@ SECRET_KEY = "$(@^69=kndq*xgwx=)oehr0atm(n99e6o1mobk=wvx^=j84#d+"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".localhost"]
 
 AUTH_USER_MODEL = "users.User"
 # Application definition
@@ -42,6 +42,10 @@ SHARED_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "bootstrap3",
+    "django_select2",
+    "simple_history",
+    "public_view",
     "franchises",
     "users",
 )
@@ -55,6 +59,9 @@ TENANT_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "bootstrap3",
+    "django_select2",
+    "simple_history",
     "pizzas",
     "users",
 )
@@ -70,7 +77,7 @@ TENANT_MODEL = "franchises.Franchise"  # app.Model
 TENANT_DOMAIN_MODEL = "franchises.Domain"  # app.Model
 
 MIDDLEWARE = [
-    'django_tenants.middleware.main.TenantMainMiddleware',
+    "django_tenants.middleware.main.TenantMainMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -80,13 +87,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'SuperPizzas.tenant_urls'
-PUBLIC_SCHEMA_URLCONF = 'SuperPizzas.public_urls'
+ROOT_URLCONF = "SuperPizzas.tenant_urls"
+PUBLIC_SCHEMA_URLCONF = "SuperPizzas.public_urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -130,9 +137,7 @@ DATABASES = {
     }
 }
 
-DATABASE_ROUTERS = (
-    'django_tenants.routers.TenantSyncRouter',
-)
+DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

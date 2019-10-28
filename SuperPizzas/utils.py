@@ -1,5 +1,8 @@
 from dotenv import dotenv_values
 from typing import Union
+from django.contrib import messages
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
 
 
 EnvSettingTypes = (str, bool, int, float, list)
@@ -78,3 +81,25 @@ def load_env_settings(
         env_values = dotenv_values(dotenv_path=dotenv_path)
 
     return unique_env_settings(env_values, defaults)
+
+
+# Decorator. Verifies user permissions
+def verify_position(allowed_positions):
+    def _method_wrapper(view_method):
+        def _arguments_wrapper(request, *args, **kwargs):
+            initial_request = request
+            if hasattr(request, "request"):  # is a CBV
+                request = request.request
+            try:
+                user = request.user
+                if not (user.position in allowed_positions):
+                    raise PermissionDenied
+            except AttributeError:
+                messages.error(request, "Para acceder a la página debe iniciar sesión")
+                return redirect("inicio")
+
+            return view_method(initial_request, *args, **kwargs)
+
+        return _arguments_wrapper
+
+    return _method_wrapper

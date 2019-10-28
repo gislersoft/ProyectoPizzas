@@ -41,13 +41,13 @@ Recuerda agregar los criterios de aceptación a las  historias de usuario.
 
 Ubicarse en la carpeta raíz del repositorio
 
-1)Instalar los requerimientos pip3 install -r requirements.pip
+1) Instalar los requerimientos pip3 install -r requirements.txt
 
-2)Crear una base de datos para el proyecto y actualizar la configuración de BD en env/secrets.env
+2) Crear una base de datos para el proyecto y actualizar la configuración de BD en env/secrets.env
 
-3)Sincronizar la base de datos: python manage.py migrate
+3) Sincronizar la base de datos: python manage.py migrate
 
-4)Ejecutar el comando: python manage.py initial_franchise para crear el tenant publico:
+4) Ejecutar el comando: python manage.py initial_franchise para crear el tenant publico:
 
 Los datos de acceso por defecto son: email="admin@admin.co", password="superpizzas"
 
