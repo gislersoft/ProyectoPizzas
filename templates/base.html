@@ -378,18 +378,18 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
-{#              <ul class="head-list">#}
-{#                <li>#}
-{#                  <a href="{% url 'usuario_perfil_usuario' user.pk %}">#}
-{#                    Perfil del usuario#}
-{#                  </a>#}
-{#                </li>#}
-{#              </ul>#}
-{#              <div class="pad-all bord-top">#}
-{#                <a href="{% url 'logout' %}" class="btn-link text-main box-block">#}
-{#                  Cerrar sesión#}
-{#                </a>#}
-{#              </div>#}
+              <ul class="head-list">
+                <li>
+                  <a href="{% url 'user_profile' %}">
+                    Perfil del usuario
+                  </a>
+                </li>
+              </ul>
+              <div class="pad-all bord-top">
+                <a href="{% url 'logout' %}" class="btn-link text-main box-block">
+                  Cerrar sesión
+                </a>
+              </div>
             </div>
           </li>
           <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->

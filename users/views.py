@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views.generic import (
     ListView
 )
@@ -6,7 +7,8 @@ from .models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 
-from .forms import SignUpForm
+from .forms import SignUpForm, UserProfileForm
+
 
 # Create your views here.
 
@@ -47,3 +49,22 @@ class UsersList(ListView):
             "Fecha de Activación"
         ]
         return context
+
+
+def user_profile(request):
+    form = UserProfileForm(instance=request.user)
+
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Perfil actualizado correctamente")
+            form = UserProfileForm()
+        else:
+            messages.error(request, "Por favor revise los campos en rojo")
+
+    return render(
+        request,
+        "user_profile.html",
+        {"form": form},
+    )
