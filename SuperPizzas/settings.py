@@ -87,6 +87,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "public_view.middleware.FranchiseValidityMiddleware",
 ]
 
 ROOT_URLCONF = "SuperPizzas.tenant_urls"
