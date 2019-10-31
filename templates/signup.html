@@ -1,39 +1,27 @@
+{% extends 'landing_base.html' %}
+{% load bootstrap3 %}
 {% load static %}
-<!DOCTYPE html>
-<html style="background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); background-size: cover; height: 100%;">
-	<head>
-		<title>Regisro - SuperPizzas!</title>
 
-		<!--Bootstrap Stylesheet [ REQUIRED ]-->
-		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+{% block content %}
+<div style="background-color: white; border-radius: 25px; padding: 1%; width: 41%; margin: auto;">
+	<h1 class="text-primary text-center">Registro en SuperPizzas</h1>
+	<br>
 
-	</head>
-
-	<body style="padding: 2%; background: rgba(0,0,0,0);">
-		<div style="background-color: white; border-radius: 25px; padding: 1%; width: 27%; margin: auto;">
-			<h1 class="text-primary text-center">Registro en SuperPizzas</h1>
-			<br>
-
-			<h5 class="text-primary text-center"><a href="{% url 'home_test' %}">Inicio</a> / 
-			<a href="{% url 'login' %}">Entrar</a></h5>
-			<br>
-
-			<form method="post">
-				{% csrf_token %}
-				{% for field in form %}
-				<p>
-					{{ field.label_tag }}<br/>
-					{{ field }}
-					{% if field.help_text %}
-						<small style="color: green">{{ field.help_text }}</small>
-					{% endif %}
-					{% for error in field.errors %}
-						<p style="color: red">{{ error }}</p>
-					{% endfor %}
-				</p>
-				{% endfor %}
-				<button type="submit" class="btn btn-primary center-block">Registrarse</button>
-			</form>
-		</div>
-	</body>
-</html>
+	<form method="post">
+		{% csrf_token %}
+		{% for field in form %}
+		<p>
+			{{ field.label_tag }}<br />
+			{{ field }}
+			{% if field.help_text %}
+			<small style="color: green">{{ field.help_text }}</small>
+			{% endif %}
+			{% for error in field.errors %}
+			<p style="color: red">{{ error }}</p>
+			{% endfor %}
+		</p>
+		{% endfor %}
+		<button type="submit" class="btn btn-primary center-block">Registrarse</button>
+	</form>
+</div>
+{% endblock %}
