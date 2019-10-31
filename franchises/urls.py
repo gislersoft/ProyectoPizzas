@@ -7,6 +7,7 @@ from .views import *
 urlpatterns = [
     path("plan-management/", plan_management, name="plan_management"),
     path("plan-management/<int:plan_id>", plan_management, name="plan_management"),
+    path("list", franchise_list, name="franchise_list"),
     url(
         r"^registrar-solicitud/(?P<plan_id>\d+)$",
         register_franchise,

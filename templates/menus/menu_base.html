@@ -10,6 +10,7 @@
 </li>
 {% if request.tenant.schema_name == "public" %}
     {% url 'plan_management' as plan_management %}
+    {% url 'franchise_list' as franchise_list %}
     <li class="{% if "franchises/" in request.path %} active active-sub {% endif %}">
         <a href="#">
             <i class="ti-agenda"></i>
@@ -19,6 +20,11 @@
             <i class="arrow"></i>
         </a>
         <ul class="collapse">
+            <li class="{% if franchise_list in request.path %} active {% endif %}">
+                <a href="{% url 'franchise_list' %}">
+                    <span class="">Listado de franquicias</span>
+                </a>
+            </li>
             <li class="{% if plan_management in request.path %} active {% endif %}">
                 <a href="{% url 'plan_management' %}">
                     <span class="">Registro de planes</span>
