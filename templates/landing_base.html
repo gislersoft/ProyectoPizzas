@@ -151,12 +151,12 @@
                 <!-- User dropdown menu -->
                 <ul class="head-list">
                   <li>
-                    <a href="{#% url 'usuario_perfil_usuario' request.user.pk %#}">
+                    <a href="{% url 'user_profile' %}">
                       Perfil del usuario
                     </a>
                   </li>
                   <li>
-                    <a href="{#% url 'dashboard' %#}">
+                    <a href="{% url 'dashboard' %}">
                       Dashboard
                     </a>
                   </li>
@@ -201,9 +201,7 @@
                 <span class="ic-user pull-right">
                     <img class="img-circle img-user media-object" src="{% static 'img/profile-photos/2.png' %}" alt="">
                 </span>
-                <div class="username hidden-xs">
-                  {% if request.tenant.schema_name != "public" %}Participante{% else %}Cliente{% endif %}
-                </div>
+                <div class="username hidden-xs">Cliente</div>
               </a>
               <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
                 <ul class="head-list">

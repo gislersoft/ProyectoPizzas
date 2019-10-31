@@ -69,12 +69,14 @@ class User(AbstractBaseUser):
         return f"{settings.STATIC_URL}{User.DEFAULT_AVATAR}"
 
     @classmethod
-    def initial_user(cls, email="admin@admin.co", password="superpizzas"):
+    def initial_user(cls, email="admin@admin.co", password="superpizzas", hash_password=None):
         if not User.objects.count():
-            user = User.objects.create(email=email, is_active=True)
-            user.set_password(password)
+            user = User.objects.create(email=email, is_active=True, user_type=User.ADMINISTRATOR)
+            if hash_password:
+                user.password = hash_password
+            else:
+                user.set_password(password)
             user.save()
-
             return User
 
         return User.objects.get(email=email)

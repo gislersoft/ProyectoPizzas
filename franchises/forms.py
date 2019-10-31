@@ -17,7 +17,7 @@ class FranchiseForm(forms.ModelForm):
         self.fields["schema_name"].label = "System subdomain"
         self.fields[
             "schema_name"
-        ].help_text = f"Esta será su dirección: midireccion{settings.DOMAIN}"
+        ].help_text = f"Esta será su dirección: midireccion.{settings.DOMAIN}"
         # self.fields["client"].queryset = self.fields["client"]\
         #    .queryset.filter(position="Client")
 
