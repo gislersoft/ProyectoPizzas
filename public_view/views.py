@@ -14,6 +14,6 @@ def Start(request):
 
     return render(request, "public_view/public_init.html", {"title": "Inicio"})
 
-
+  
 def franchise_unavailable(request):
     return render(request, "public_view/franchise_unavailable.html")
