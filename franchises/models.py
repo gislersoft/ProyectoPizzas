@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 from django_tenants.models import DomainMixin, TenantMixin
 from django_tenants.postgresql_backend.base import _is_valid_schema_name
 
@@ -91,6 +92,8 @@ class Franchise(TenantMixin):
         else:
             print("Ya existe una franquicia")
 
+    def is_available(self):
+        return self.validity >= timezone.now()
 
 class Domain(DomainMixin):
     history = HistoricalRecords()
