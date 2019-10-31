@@ -87,6 +87,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "public_view.middleware.FranchiseValidityMiddleware",
 ]
 
 ROOT_URLCONF = "SuperPizzas.tenant_urls"
@@ -175,6 +176,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = (BASE_DIR, "static")
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "static")
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "..", "media")
 MEDIA_URL = "/media/"
 
 MAX_FILE_SIZE = 10485760  # 10MB
@@ -182,11 +184,9 @@ MAX_FILE_SIZE = 10485760  # 10MB
 DOMAIN = "localhost"
 
 
-#RECAPTCHA_PUBLIC_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-#RECAPTCHA_PRIVATE_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
-NORECAPTCHA_SITE_KEY  = "6Lc68b8UAAAAAClNVCXOXe3iedRGpkaOt_dyOIC-"
-NORECAPTCHA_SECRET_KEY = "6Lc68b8UAAAAANSl26dYlreBDskaT5TzZPxOc6Nl"
-SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+RECAPTCHA_PUBLIC_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+RECAPTCHA_PRIVATE_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+NOCAPTCHA = True
 # LOGIN/LOGOUT/SIGN-UP
 LOGIN_REDIRECT_URL = 'home_test'
 LOGOUT_REDIRECT_URL = 'home_test'

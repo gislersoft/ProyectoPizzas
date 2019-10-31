@@ -2,9 +2,9 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-{% block title%}
+{% block title %}
     Solicitar creación de empresa
-{% endblock title%}
+{% endblock title %}
 
 {% block page_title %}
     Solicitar creación de empresa
@@ -31,8 +31,13 @@
                     <form class="form-vertical" method="POST">{% csrf_token %}
                         {% bootstrap_form form layout="vertical" %}
                         <div class="col-sm-6 col-md-4">
-                                {{ form.captcha }}
-                            </div>
+                            {% if form.captcha.errors %}
+                                <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top:10px">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    Debe realizar la verificación del reCAPTCHA ("No soy un robot")
+                                </div>
+                            {% endif %}
+                        </div>
                         <div class="col-xs-12" align="right">
                             <a href="{% url 'inicio' %}" class="btn btn-dark">Volver</a>
 
@@ -56,14 +61,14 @@
         $help_text = $id_schema_name.next();
         console.log($help_text.html());
         console.log(domain);
-        if ($help_text.html() !== 'Esta será su direccion: midireccion'+domain){
+        if ($help_text.html() !== 'Esta será su direccion: midireccion' + domain) {
             $help_text = $help_text.next();
         }
 
-        $id_schema_name.on('change keydown paste input',function () {
+        $id_schema_name.on('change keydown paste input', function () {
             address = $id_schema_name.val();
 
-            $help_text.html('Esta será su direccion: '+address+domain);
+            $help_text.html('Esta será su direccion: ' + address + domain);
         });
         $id_schema_name.trigger('change');
 
@@ -71,12 +76,13 @@
 
     <script>
         static = {% static '' %};
-        function get_theme_link(){
-            return static+"css/themes/type-"+$("#id_theme").val()+"/theme-"+$("#id_colour").val()+".min.css"
+
+        function get_theme_link() {
+            return static + "css/themes/type-" + $("#id_theme").val() + "/theme-" + $("#id_colour").val() + ".min.css"
         }
 
-        $('#id_theme, #id_colour').on('change',function () {
-            $('#app-theme').attr("href",get_theme_link())
+        $('#id_theme, #id_colour').on('change', function () {
+            $('#app-theme').attr("href", get_theme_link())
         })
     </script>
 

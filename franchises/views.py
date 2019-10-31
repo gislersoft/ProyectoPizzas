@@ -25,6 +25,7 @@ def plan_management(request, plan_id=None):
         if form.is_valid():
             form.save()
             messages.success(request, "Plan guardado correctamente")
+            form = PlanForm()
         else:
             messages.error(request, "Por favor revise los campos en rojo")
 
@@ -81,4 +82,11 @@ def register_franchise(request, plan_id=1):
             .all(),
             "domain": settings.DOMAIN,
         },
+    )
+
+
+def franchise_list(request):
+    franchises = Franchise.objects.all()
+    return render(
+        request, "franchises/franchises_list.html", {"franchises": franchises}
     )
