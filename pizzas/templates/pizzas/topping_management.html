@@ -49,50 +49,6 @@
         <div class="panel-footer"></div>
       </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-8">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <div class="panel-control">
-          </div>
-          <h3 class="panel-title">Ingredientes registrados en el sistema</h3>
-        </div>
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered responsive-table">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Imagen</th>
-                  <th>Opciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for topping in toppings %}
-                  <tr>
-                    <td>{{ topping.name }}</td>
-                    <td>{{ topping.image }}</td>
-                    <td>
-                      <div class="dropdown">
-                        <button class="btn btn-sm btn-primary btn-active-primary dropdown-toggle"
-                                data-toggle="dropdown" type="button">
-                          Opciones <i class="ti-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                          <li>
-                            <a href="{% url 'topping_management' topping.pk %}">Editar</a>
-                          </li>
-                        </ul>
-                    </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="panel-footer">
-        </div>
-      </div>
-    </div>
   </div>
 {% endblock %}
 
