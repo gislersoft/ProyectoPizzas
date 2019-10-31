@@ -82,3 +82,10 @@ def register_franchise(request, plan_id=1):
             "domain": settings.DOMAIN,
         },
     )
+
+
+def franchise_list(request):
+    franchises = Franchise.objects.all()
+    return render(
+        request, "franchises/franchises_list.html", {"franchises": franchises}
+    )

@@ -93,3 +93,6 @@ class Franchise(TenantMixin):
 
 class Domain(DomainMixin):
     history = HistoricalRecords()
+
+    def __str__(self):
+        return self.domain
