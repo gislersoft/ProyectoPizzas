@@ -178,3 +178,7 @@ MEDIA_URL = "/media/"
 MAX_FILE_SIZE = 10485760  # 10MB
 
 DOMAIN = "localhost"
+
+# LOGIN/LOGOUT/SIGN-UP
+LOGIN_REDIRECT_URL = 'home_test'
+LOGOUT_REDIRECT_URL = 'home_test'
