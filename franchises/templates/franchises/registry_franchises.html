@@ -59,9 +59,7 @@
         dominio = '{{ domain|safe }}';
         $id_schema_name = $('#id_schema_name');
         $help_text = $id_schema_name.next();
-        console.log($help_text.html());
-        console.log(domain);
-        if ($help_text.html() !== 'Esta será su direccion: midireccion' + domain) {
+        if ($help_text.html() !== 'Esta será su direccion: midireccion.' + domain) {
             $help_text = $help_text.next();
         }
 
