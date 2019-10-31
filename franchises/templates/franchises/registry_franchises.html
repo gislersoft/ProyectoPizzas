@@ -29,8 +29,12 @@
                 <div class="panel-body">
                     <form class="form-vertical" method="POST">{% csrf_token %}
                         {% bootstrap_form form layout="vertical" %}
+                        <div class="col-sm-6 col-md-4">
+                                {{ form.captcha }}
+                            </div>
                         <div class="col-xs-12" align="right">
                             <a href="{% url 'inicio' %}" class="btn btn-dark">Volver</a>
+
                             <button type="submit" class="btn btn-primary">
                                 Guardar
                             </button>

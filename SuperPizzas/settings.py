@@ -42,6 +42,7 @@ SHARED_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "captcha",
     "bootstrap3",
     "django_select2",
     "simple_history",
@@ -59,6 +60,7 @@ TENANT_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "captcha",
     "bootstrap3",
     "django_select2",
     "simple_history",
@@ -178,3 +180,9 @@ MEDIA_URL = "/media/"
 MAX_FILE_SIZE = 10485760  # 10MB
 
 DOMAIN = "localhost"
+
+#RECAPTCHA_PUBLIC_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+#RECAPTCHA_PRIVATE_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+NORECAPTCHA_SITE_KEY  = "6Lc68b8UAAAAAClNVCXOXe3iedRGpkaOt_dyOIC-"
+NORECAPTCHA_SECRET_KEY = "6Lc68b8UAAAAANSl26dYlreBDskaT5TzZPxOc6Nl"
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

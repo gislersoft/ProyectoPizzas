@@ -1,10 +1,14 @@
 from django import forms
 from django_select2.forms import Select2MultipleWidget
+from captcha.fields import ReCaptchaField
 
 from .models import *
 
 
 class FranchiseForm(forms.ModelForm):
+    captcha = ReCaptchaField(label="Debe realizar la verificación captcha.")
+    #,public_key='6Lc68b8UAAAAAClNVCXOXe3iedRGpkaOt_dyOIC-',
+    #private_key='6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe')
     def __init__(self, *args, **kwargs):
         from django.conf import settings
 
