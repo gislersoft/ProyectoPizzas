@@ -54,7 +54,7 @@ def check_schema_name(name):
 
 class Franchise(TenantMixin):
     name = models.CharField("Nombre de la franquicia", max_length=300, unique=True)
-    schema_name = models.CharField(
+    schema_name = models.CharField("Subdominio",
         max_length=300, unique=True, validators=[check_schema_name]
     )
     client = models.ForeignKey(
@@ -65,9 +65,10 @@ class Franchise(TenantMixin):
         null=True,
     )
     plan = models.ForeignKey(
-        Plan, related_name="franchises", on_delete=models.SET_NULL, null=True
+        Plan, related_name="franchises", on_delete=models.SET_NULL, null=True,
+            verbose_name="Plan"
     )
-    validity = models.DateTimeField(
+    validity = models.DateTimeField("Fecha de vencimiento del servicio",
         help_text="Fecha hasta la que se encuentra pago el servicio"
     )
 
