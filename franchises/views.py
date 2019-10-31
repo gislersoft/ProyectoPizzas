@@ -25,6 +25,7 @@ def plan_management(request, plan_id=None):
         if form.is_valid():
             form.save()
             messages.success(request, "Plan guardado correctamente")
+            form = PlanForm()
         else:
             messages.error(request, "Por favor revise los campos en rojo")
 
