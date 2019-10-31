@@ -1,0 +1,54 @@
+{% extends "tables_base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block title %}
+  Gestionar pizzas
+{% endblock %}
+
+{% block page_title %}
+  Gestionar pizzas
+{% endblock %}
+
+{% block panel_title %}
+  Gestionar pizzas
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="active">Gestionar pizzas</li>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-control"></div>
+          <h3 class="panel-title">Gestionar pizzas</h3>
+        </div>
+        <div class="panel-body">
+          <form class="form-vertical" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                {% bootstrap_form form layout="vertical" %}
+                {% if form.errors %}
+                  <div class="alert alert-danger">
+                    {{ form.errors }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-xs-12" align="right">
+              <a href="{% url 'home' %}" class="btn btn-dark">Volver</a>
+              <button type="submit" class="btn btn-primary">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
