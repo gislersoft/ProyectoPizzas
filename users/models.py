@@ -39,9 +39,10 @@ class User(AbstractBaseUser):
 
     ADMINISTRATOR = "Administrador"
     FRANCHISE = "Franquicia"
+    CLIENT = "Cliente"
     DEFAULT_AVATAR = "images/profile.png"
 
-    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (FRANCHISE, FRANCHISE))
+    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (FRANCHISE, FRANCHISE), (CLIENT,CLIENT))
 
     email = models.EmailField("Correo Electrónico", blank=True, unique=True)
     first_name = models.CharField("Nombres", max_length=150, blank=True)

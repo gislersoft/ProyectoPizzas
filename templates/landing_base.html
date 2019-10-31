@@ -100,7 +100,7 @@
 <body>
 
 <div id="container" class="effect aside-float aside-bright boxed-layout"
-{#     style="background-image:url({% static 'img/bg-img/1.jpg' %}); background-repeat: no-repeat; background-size: cover;"#}
+    {#     style="background-image:url({% static 'img/bg-img/1.jpg' %}); background-repeat: no-repeat; background-size: cover;"#}
 >
 
   <!--NAVBAR-->
@@ -135,15 +135,15 @@
           <li id="dropdown-user" class="dropdown">
             {% if request.user.is_authenticated %}
               <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-                                    <span class="ic-user pull-right">
-                                        {% if user.avatar %}
-                                          <img class="img-circle img-user media-object" src="{{ user.avatar.url }}" alt="">
-                                        {% else %}
-                                          <img class="img-circle img-user media-object" src="{% static 'img/desconocido.jpg' %}" alt="">
-                                        {% endif %}
-                                    </span>
+                <span class="ic-user pull-right">
+                    {% if request.user.avatar %}
+                      <img class="img-circle img-user media-object" src="{{ request.user.avatar.url }}" alt="">
+                    {% else %}
+                      <img class="img-circle img-user media-object" src="{% static 'img/desconocido.jpg' %}" alt="">
+                    {% endif %}
+                </span>
                 <div class="username hidden-xs">
-                  {{ user.get_full_name }} ({{ user.user_type }})
+                  {{ request.user }} ({{ request.user.user_type|default_if_none:"" }})
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
@@ -151,17 +151,16 @@
                 <!-- User dropdown menu -->
                 <ul class="head-list">
                   <li>
-                    <a href="{% url 'usuario_perfil_usuario' user.pk %}">
+                    <a href="{#% url 'usuario_perfil_usuario' request.user.pk %#}">
                       Perfil del usuario
                     </a>
                   </li>
                   <li>
-                    <a href="{% url 'dashboard' %}">
+                    <a href="{#% url 'dashboard' %#}">
                       Dashboard
                     </a>
                   </li>
                 </ul>
-
                 <!-- Dropdown footer -->
                 <div class="pad-all text-right">
                   <a href="{% url 'logout' %}" class="btn btn-primary">
@@ -170,11 +169,10 @@
                 </div>
               </div>
             {% else %}
-
               <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-                                        <span class="ic-user pull-right">
-                                            <img class="img-circle img-user media-object" src="{% static 'img/desconocido.jpg' %}" alt="">
-                                        </span>
+                <span class="ic-user pull-right">
+                    <img class="img-circle img-user media-object" src="{% static 'img/desconocido.jpg' %}" alt="">
+                </span>
                 <div class="username hidden-xs">
                   Ingresar
                 </div>
@@ -182,7 +180,7 @@
               <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
                 <ul class="head-list">
                   <li>
-                    <a href="">
+                    <a href="{% url 'login' %}">
                       Ingreso a la aplicación
                     </a>
                   </li>
@@ -200,10 +198,9 @@
             <li id="dropdown-user" class="dropdown">
               <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
 
-                                        <span class="ic-user pull-right">
-                                            <img class="img-circle img-user media-object" src="{% static 'img/profile-photos/2.png' %}" alt="">
-                                        </span>
-
+                <span class="ic-user pull-right">
+                    <img class="img-circle img-user media-object" src="{% static 'img/profile-photos/2.png' %}" alt="">
+                </span>
                 <div class="username hidden-xs">
                   {% if request.tenant.schema_name != "public" %}Participante{% else %}Cliente{% endif %}
                 </div>
@@ -211,7 +208,7 @@
               <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
                 <ul class="head-list">
                   <li>
-                    <a href="">
+                    <a href="{% url 'signup' %}">
                       Registrarse
                     </a>
                   </li>

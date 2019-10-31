@@ -23,7 +23,7 @@ class FranchiseForm(forms.ModelForm):
 
     class Meta:
         model = Franchise
-        exclude = ("theme", "colour")
+        fields = ("name", "schema_name", "validity")
         widgets = {
             "validity": forms.DateInput(
                 attrs={"class": "component-date"}, format="%Y-%m-%d"

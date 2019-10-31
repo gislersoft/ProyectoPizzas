@@ -36,12 +36,12 @@ def plan_management(request, plan_id=None):
     )
 
 
-# @verify_position(allowed_position=["Administrador"])
+@verify_position(allowed_positions=[User.FRANCHISE])
 def register_franchise(request, plan_id=1):
     plan = Plan.search(plan_id)
     if not plan:
         messages.error(request, "No existe el plan buscado")
-        return redirect("inicio")
+        return redirect("home")
 
     if request.method == "POST":
 
@@ -49,7 +49,10 @@ def register_franchise(request, plan_id=1):
 
         if form.is_valid():
 
-            franchise = form.save()
+            franchise = form.save(commit=False)
+            franchise.client = request.user
+            franchise.plan = plan
+            franchise.save()
             domain = Domain(
                 domain=f"{franchise.schema_name}.{settings.DOMAIN}",
                 is_primary=True,
@@ -63,7 +66,7 @@ def register_franchise(request, plan_id=1):
             franchise.plan = plan
             franchise.save()
             messages.success(request, "La franquicia ha sido creada exitosamente")
-            return redirect("franchise_register_franchise")
+            return redirect("franchise_list")
         else:
             messages.error(
                 request, "No se pudo registrar la franquicia, contacte al soporte"
@@ -86,7 +89,7 @@ def register_franchise(request, plan_id=1):
 
 
 def franchise_list(request):
-    franchises = Franchise.objects.all()
+    franchises = Franchise.objects.filter(client=request.user) if request.user.user_type == User.FRANCHISE else Franchise.objects.all()
     return render(
         request, "franchises/franchises_list.html", {"franchises": franchises}
     )
