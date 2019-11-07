@@ -17,21 +17,15 @@ def avatar_path(instance, filename):
 class customManager(BaseUserManager):
     def create_user(self, email, password, first_name, last_name):
         user = User.objects.create(
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name,
-                    is_active=True,
-            )
+            email=email, first_name=first_name, last_name=last_name, is_active=True
+        )
         user.set_password(password)
         user.save()
 
     def create_superuser(self, email, password, first_name, last_name):
         user = User.objects.create(
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name,
-                    is_active=True,
-            )
+            email=email, first_name=first_name, last_name=last_name, is_active=True
+        )
         user.set_password(password)
         user.save()
 
@@ -43,7 +37,12 @@ class User(AbstractBaseUser):
     DIGITIZER = "Digitador"
     FRANCHISE = "Franquicia"
     CLIENT = "Cliente"
-    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (DIGITIZER, DIGITIZER), (FRANCHISE, FRANCHISE), (CLIENT, CLIENT))
+    USER_TYPES = (
+        (ADMINISTRATOR, ADMINISTRATOR),
+        (DIGITIZER, DIGITIZER),
+        (FRANCHISE, FRANCHISE),
+        (CLIENT, CLIENT),
+    )
     DEFAULT_AVATAR = "images/profile.png"
 
     email = models.EmailField("Correo Electrónico", blank=True, unique=True)
@@ -57,7 +56,12 @@ class User(AbstractBaseUser):
         verbose_name="Imagen", upload_to=avatar_path, blank=True, null=True
     )
     user_type = models.CharField(
-        "Tipo de Usuario", max_length=50, choices=USER_TYPES, null=False, blank=True, default=USER_TYPES[2][0]
+        "Tipo de Usuario",
+        max_length=50,
+        choices=USER_TYPES,
+        null=False,
+        blank=True,
+        default=USER_TYPES[2][0],
     )
 
     EMAIL_FIELD = "email"
@@ -71,9 +75,13 @@ class User(AbstractBaseUser):
         return f"{settings.STATIC_URL}{User.DEFAULT_AVATAR}"
 
     @classmethod
-    def initial_user(cls, email="admin@admin.co", password="superpizzas", hash_password=None):
+    def initial_user(
+        cls, email="admin@admin.co", password="superpizzas", hash_password=None
+    ):
         if not User.objects.count():
-            user = User.objects.create(email=email, is_active=True, user_type=User.ADMINISTRATOR)
+            user = User.objects.create(
+                email=email, is_active=True, user_type=User.ADMINISTRATOR
+            )
             if hash_password:
                 user.password = hash_password
             else:

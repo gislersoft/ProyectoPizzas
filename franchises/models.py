@@ -55,8 +55,8 @@ def check_schema_name(name):
 
 class Franchise(TenantMixin):
     name = models.CharField("Nombre de la franquicia", max_length=300, unique=True)
-    schema_name = models.CharField("Subdominio",
-        max_length=300, unique=True, validators=[check_schema_name]
+    schema_name = models.CharField(
+        "Subdominio", max_length=300, unique=True, validators=[check_schema_name]
     )
     client = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -66,11 +66,15 @@ class Franchise(TenantMixin):
         null=True,
     )
     plan = models.ForeignKey(
-        Plan, related_name="franchises", on_delete=models.SET_NULL, null=True,
-            verbose_name="Plan"
+        Plan,
+        related_name="franchises",
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="Plan",
     )
-    validity = models.DateTimeField("Fecha de vencimiento del servicio",
-        help_text="Fecha hasta la que se encuentra pago el servicio"
+    validity = models.DateTimeField(
+        "Fecha de vencimiento del servicio",
+        help_text="Fecha hasta la que se encuentra pago el servicio",
     )
 
     def __str__(self):
@@ -94,6 +98,7 @@ class Franchise(TenantMixin):
 
     def is_available(self):
         return self.validity >= timezone.now()
+
 
 class Domain(DomainMixin):
     history = HistoricalRecords()

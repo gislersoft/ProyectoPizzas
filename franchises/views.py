@@ -43,6 +43,7 @@ def register_franchise(request, plan_id=1):
         form = FranchiseForm(request.POST)
         if form.is_valid():
             from django.db import connection
+
             franchise = form.save(commit=False)
             franchise.client = request.user
             franchise.plan = plan
@@ -54,7 +55,9 @@ def register_franchise(request, plan_id=1):
             )
             domain.save()
             connection.set_tenant(franchise)
-            User.initial_user(email=franchise.client.email, hash_password=franchise.client.password)
+            User.initial_user(
+                email=franchise.client.email, hash_password=franchise.client.password
+            )
             connection.set_schema_to_public()
             messages.success(request, "La franquicia ha sido creada exitosamente")
             return redirect("franchise_list")
@@ -80,7 +83,11 @@ def register_franchise(request, plan_id=1):
 
 
 def franchise_list(request):
-    franchises = Franchise.objects.filter(client=request.user) if request.user.user_type == User.FRANCHISE else Franchise.objects.all()
+    franchises = (
+        Franchise.objects.filter(client=request.user)
+        if request.user.user_type == User.FRANCHISE
+        else Franchise.objects.all()
+    )
     return render(
         request, "franchises/franchises_list.html", {"franchises": franchises}
     )
