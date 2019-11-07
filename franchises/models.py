@@ -23,6 +23,15 @@ class Module(models.Model):
 
 
 class Plan(models.Model):
+    @staticmethod
+    def search(id):
+        try:
+            return Franchise.objects.get(id=id)
+        except Franchise.DoesNotExist:
+            return None
+
+
+
     name = models.CharField(max_length=100, verbose_name="nombre")
     description = models.CharField(
         max_length=1000, verbose_name="descripción", blank=True, null=True

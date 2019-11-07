@@ -91,8 +91,53 @@ def franchise_list(request):
     )
 
 
-def dump_data(request):
-    sysout = sys.stdout
-    sys.stdout = open('data_dump.json', 'w')
-    call_command('dumpdata', 'franchises', 'pizzas', 'users')
-    sys.stdout = sysout
+#@verify_position(allowed_positions=[User.FRANCHISE])
+def dump_data(request, empresa_id):
+    """
+    Función que permite obtener un backup de los datos de la empresa a un cliente
+    :param request:
+    :param empresa_id:
+    :return:
+    """
+    import sys
+    from io import StringIO
+
+    from django.http import HttpResponse
+    from django.core.management import call_command
+    from django.db import connection
+
+    from franchises.models import Franchise
+
+    franchise_backup = StringIO()
+
+    try:
+        franchise = Franchise.search(empresa_id)
+        if franchise:
+            connection.set_tenant(franchise)
+            sysout = sys.stdout
+            sys.stdout = franchise_backup
+            call_command(
+                "dumpdata", indent=4, exclude=["auth", "sessions", "contenttypes"]
+            )
+            sys.stdout = sysout
+            connection.set_schema_to_public()
+        else:
+            messages.error(
+                request, "Error al generar el archivo, por favor intente nuevamente."
+            )
+            return redirect("empresa_gestionar_empresas_cliente")
+
+    except Exception:
+        messages.error(
+            request, "Error al generar el archivo, por favor intente nuevamente."
+        )
+        return redirect("empresa_gestionar_empresas_cliente")
+
+    franchise_backup.seek(0)
+    response = HttpResponse(franchise_backup, content_type="application/text")
+    franchise_backup.close()
+    response["Content-Disposition"] = (
+        "attachment; filename=backup-%s.json" % franchise.nombre
+    )
+
+    return response
