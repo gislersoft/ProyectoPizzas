@@ -18,3 +18,10 @@ class UserForm(forms.ModelForm):
             "user_type",
         )
         widgets = {"password": forms.PasswordInput}
+
+    def save(self, commit=True):
+        user = super(UserForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user

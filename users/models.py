@@ -33,7 +33,7 @@ class User(AbstractBaseUser):
         verbose_name="Imagen", upload_to=avatar_path, blank=True, null=True
     )
     user_type = models.CharField(
-        "Tipo de Usuario", max_length=50, choices=USER_TYPES, null=True, blank=True
+        "Tipo de Usuario", max_length=50, choices=USER_TYPES, null=False, blank=True, default=USER_TYPES[2][0]
     )
 
     EMAIL_FIELD = "email"

@@ -4,16 +4,24 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 from django.views.generic import ListView
+from django.contrib.auth.hashers import make_password
 
 
 def register_user_admin(request):
+    # TODO: Check if user is admin
+    # if not request.user.is_authenticated:
+    #     messages.error(
+    #         request, f"Debes iniciar sesión."
+    #     )
+    #     return redirect("home")
+    # if request.user.user_type=="Administrador":
     if request.method == "POST":
 
         form = UserForm(request.POST)
 
         if form.is_valid():
 
-            user = form.save()
+            form.save()
             messages.success(request, "El usuario ha sido creada exitosamente")
             return redirect("register_user_admin")
         else:
@@ -28,6 +36,11 @@ def register_user_admin(request):
         "users/register_user_admin.html",
         {"form": form, "title": "User registration", "domain": settings.DOMAIN},
     )
+    # else:
+    #     messages.error(
+    #         request, f"Como {request.user.user_type} no puedes acceder a esta página."
+    #     )
+    #     return redirect("home")
 
 
 class UsersList(ListView):
