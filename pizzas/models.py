@@ -6,7 +6,7 @@ from django.db import models
 
 def topping_image_path(instance, filename):
     _, file_extension = os.path.splitext(filename)
-    return "/toppings/".join(["users", str(instance.id), f"image{file_extension}"])
+    return "/toppings/".join(["toppings", str(instance.id), f"image{file_extension}"])
 
 
 class Topping(models.Model):

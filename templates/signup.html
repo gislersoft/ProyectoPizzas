@@ -1,0 +1,27 @@
+{% extends 'landing_base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+<div style="background-color: white; border-radius: 25px; padding: 1%; width: 41%; margin: auto;">
+	<h1 class="text-primary text-center">Registro en {{ request.tenant.name}}</h1>
+	<br>
+
+	<form method="post">
+		{% csrf_token %}
+		{% for field in form %}
+		<p>
+			{{ field.label_tag }}<br />
+			{{ field }}
+			{% if field.help_text %}
+			<small style="color: green">{{ field.help_text }}</small>
+			{% endif %}
+			{% for error in field.errors %}
+			<p style="color: red">{{ error }}</p>
+			{% endfor %}
+		</p>
+		{% endfor %}
+		<button type="submit" class="btn btn-primary center-block">Registrarse</button>
+	</form>
+</div>
+{% endblock %}

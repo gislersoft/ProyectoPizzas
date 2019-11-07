@@ -1,0 +1,10 @@
+<h2>¡SuperPizzas.com!</h2>
+
+{% if user.is_authenticated %}
+	<p>Hi {{ user.first_name }}, ¡Bienvenido a SuperPizzas!</p>
+	<p><a href="{% url 'logout' %}">Salir</a></p>
+{% else %}
+	<p>¡No has entrado!</p>
+	<a href="{% url 'login' %}">Entrar</a> / 
+	<a href="{% url 'signup' %}">Registrarse</a>
+{% endif %}

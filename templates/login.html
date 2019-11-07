@@ -1,0 +1,17 @@
+{% extends 'landing_base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+<div style="background-color: white; border-radius: 25px; padding: 1%; width: 27%; margin: auto;">
+	<h1 class="text-primary text-center">¡Entrar a SuperPizzas!</h1>
+	<br>
+
+
+	<form method="post">
+		{% csrf_token %}
+		{% bootstrap_form form layout="vertical" %}
+		<button type="submit" class="btn btn-primary center-block">Entrar</button>
+	</form>
+</div>
+{% endblock %}

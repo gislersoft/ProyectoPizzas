@@ -3,7 +3,7 @@ import os
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 from django.utils.functional import cached_property
 
@@ -14,13 +14,37 @@ def avatar_path(instance, filename):
     return "/".join(["users", str(instance.id), f"avatar{file_extension}"])
 
 
+class customManager(BaseUserManager):
+    def create_user(self, email, password, first_name, last_name):
+        user = User.objects.create(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_active=True,
+            )
+        user.set_password(password)
+        user.save()
+
+    def create_superuser(self, email, password, first_name, last_name):
+        user = User.objects.create(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    is_active=True,
+            )
+        user.set_password(password)
+        user.save()
+
+
 class User(AbstractBaseUser):
+    objects = customManager()
+
     ADMINISTRATOR = "Administrador"
     DIGITIZER = "Digitador"
-    USER = "Usuario"
+    FRANCHISE = "Franquicia"
+    CLIENT = "Cliente"
+    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (DIGITIZER, DIGITIZER), (FRANCHISE, FRANCHISE), (CLIENT, CLIENT))
     DEFAULT_AVATAR = "images/profile.png"
-
-    USER_TYPES = ((ADMINISTRATOR, ADMINISTRATOR), (DIGITIZER, DIGITIZER), (USER, USER))
 
     email = models.EmailField("Correo Electrónico", blank=True, unique=True)
     first_name = models.CharField("Nombres", max_length=150, blank=True)
@@ -47,12 +71,14 @@ class User(AbstractBaseUser):
         return f"{settings.STATIC_URL}{User.DEFAULT_AVATAR}"
 
     @classmethod
-    def initial_user(cls, email="admin@admin.co", password="superpizzas"):
+    def initial_user(cls, email="admin@admin.co", password="superpizzas", hash_password=None):
         if not User.objects.count():
-            user = User.objects.create(email=email, is_active=True)
-            user.set_password(password)
+            user = User.objects.create(email=email, is_active=True, user_type=User.ADMINISTRATOR)
+            if hash_password:
+                user.password = hash_password
+            else:
+                user.set_password(password)
             user.save()
-
             return User
 
         return User.objects.get(email=email)

@@ -1,10 +1,15 @@
 from django import forms
 from django_select2.forms import Select2MultipleWidget
+from captcha.fields import ReCaptchaField
+
 
 from .models import *
 
 
 class FranchiseForm(forms.ModelForm):
+    captcha = ReCaptchaField(label="Debe realizar la verificación captcha.")
+    #,public_key='6Lc68b8UAAAAAClNVCXOXe3iedRGpkaOt_dyOIC-',
+    #private_key='6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe')
     def __init__(self, *args, **kwargs):
         from django.conf import settings
 
@@ -12,13 +17,13 @@ class FranchiseForm(forms.ModelForm):
         self.fields["schema_name"].label = "System subdomain"
         self.fields[
             "schema_name"
-        ].help_text = f"Esta será su dirección: midireccion{settings.DOMAIN}"
+        ].help_text = f"Esta será su dirección: midireccion.{settings.DOMAIN}"
         # self.fields["client"].queryset = self.fields["client"]\
         #    .queryset.filter(position="Client")
 
     class Meta:
         model = Franchise
-        exclude = ("theme", "colour")
+        fields = ("name", "schema_name", "validity")
         widgets = {
             "validity": forms.DateInput(
                 attrs={"class": "component-date"}, format="%Y-%m-%d"
