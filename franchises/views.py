@@ -6,6 +6,11 @@ from django.shortcuts import render, redirect
 from SuperPizzas.utils import verify_position
 from .forms import *
 from .models import *
+import sys
+
+from django.core.management import call_command
+
+
 
 
 def plan_management(request, plan_id=None):
@@ -84,3 +89,10 @@ def franchise_list(request):
     return render(
         request, "franchises/franchises_list.html", {"franchises": franchises}
     )
+
+
+def dump_data(request):
+    sysout = sys.stdout
+    sys.stdout = open('data_dump.json', 'w')
+    call_command('dumpdata', 'franchises', 'pizzas', 'users')
+    sys.stdout = sysout
