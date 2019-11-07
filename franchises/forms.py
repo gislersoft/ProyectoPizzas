@@ -17,13 +17,13 @@ class FranchiseForm(forms.ModelForm):
         self.fields["schema_name"].label = "System subdomain"
         self.fields[
             "schema_name"
-        ].help_text = f"Esta será su dirección: midireccion{settings.DOMAIN}"
+        ].help_text = f"Esta será su dirección: midireccion.{settings.DOMAIN}"
         # self.fields["client"].queryset = self.fields["client"]\
         #    .queryset.filter(position="Client")
 
     class Meta:
         model = Franchise
-        exclude = ("theme", "colour")
+        fields = ("name", "schema_name", "validity")
         widgets = {
             "validity": forms.DateInput(
                 attrs={"class": "component-date"}, format="%Y-%m-%d"

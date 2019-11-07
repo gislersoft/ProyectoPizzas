@@ -92,11 +92,11 @@ def verify_position(allowed_positions):
                 request = request.request
             try:
                 user = request.user
-                if not (user.position in allowed_positions):
+                if not (user.user_type in allowed_positions):
                     raise PermissionDenied
             except AttributeError:
                 messages.error(request, "Para acceder a la página debe iniciar sesión")
-                return redirect("inicio")
+                return redirect("home")
 
             return view_method(initial_request, *args, **kwargs)
 
