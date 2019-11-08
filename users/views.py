@@ -36,7 +36,7 @@ def register_user_admin(request):
     if not request.user.is_authenticated:
         messages.error(request, f"Debes iniciar sesión.")
         return redirect("login")
-    if request.user.user_type == "Administrador":
+    if request.user.user_type == User.ADMINISTRATOR:
         if request.method == "POST":
 
             form = UserForm(request.POST)
@@ -56,7 +56,7 @@ def register_user_admin(request):
         return render(
             request,
             "users/register_user_admin.html",
-            {"form": form, "title": "User registration", "domain": settings.DOMAIN},
+            {"form": form, "title": "User registration", "domain": settings.DOMAIN, "users": User.objects.all()},
         )
     else:
         messages.error(
