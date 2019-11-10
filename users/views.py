@@ -11,6 +11,10 @@ from .forms import SignUpForm, UserProfileForm
 
 
 # Create your views here.
+def clients_list(request):
+    users = User.objects.filter(user_type="CLIENT")
+    contexto = {'users':users}
+    return render(request, 'clients_list.html',contexto)
 
 def home(request):
     return render(request, 'home_test.html')

@@ -12,4 +12,5 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('profile/', user_profile, name='user_profile'),
     url(r"^list", UsersList.as_view(), name="users_list"),
+    path('clients_list/', clients_list, name='clients_list'),
 ]
