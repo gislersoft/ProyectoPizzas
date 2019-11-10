@@ -3,9 +3,10 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import User
-
+from captcha.fields import ReCaptchaField
 
 class SignUpForm(UserCreationForm):
+    captcha = ReCaptchaField(label="Debe realizar la verificación captcha.")
     first_name = forms.CharField(max_length=100, help_text='Necesario. 100 caracteres o menos.', label="Nombre", widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(max_length=100, help_text='Necesario. 100 caracteres o menos.', label="Apellido", widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(max_length=100, help_text='Necesario. 100 caracteres o menos.', widget=forms.EmailInput(attrs={'class': 'form-control'}))

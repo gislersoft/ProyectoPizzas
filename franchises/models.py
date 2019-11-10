@@ -104,6 +104,13 @@ class Franchise(TenantMixin):
     def is_available(self):
         return self.validity >= timezone.now()
 
+    @staticmethod
+    def search(id):
+        try:
+            return Franchise.objects.get(id=id)
+        except Franchise.DoesNotExist:
+            return None
+
 class Domain(DomainMixin):
     history = HistoricalRecords()
 

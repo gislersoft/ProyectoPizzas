@@ -15,7 +15,9 @@ from .forms import SignUpForm, UserProfileForm
 def home(request):
     return render(request, 'home_test.html')
 
-def signup(request):
+
+
+def signup(request,user_type='general'):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -25,7 +27,10 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(email=user.email, password=raw_password)
             login(request, user)
-            return redirect('home')
+            if user_type == 'admin':
+                return user, redirect('home')
+            else:
+                return redirect('home')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', { 'form' : form })

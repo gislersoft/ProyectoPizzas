@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 
 from SuperPizzas.utils import verify_position
+from users.forms import SignUpForm
+from users.views import signup
 from .forms import *
 from .models import *
 import sys
@@ -37,7 +39,7 @@ def plan_management(request, plan_id=None):
     )
 
 
-@verify_position(allowed_positions=[User.FRANCHISE])
+#@verify_position(allowed_positions=[User.FRANCHISE])
 def register_franchise(request, plan_id=1):
     plan = Plan.search(plan_id)
     if not plan:
@@ -45,36 +47,46 @@ def register_franchise(request, plan_id=1):
         return redirect("home")
 
     if request.method == "POST":
-        form = FranchiseForm(request.POST)
-        if form.is_valid():
+        form_franchise = FranchiseForm(request.POST)
+        form_user = SignUpForm(request.POST)
+        if form_franchise.is_valid() and form_user.is_valid():
+
             from django.db import connection
-            franchise = form.save(commit=False)
-            franchise.client = request.user
-            franchise.plan = plan
-            franchise.save()
-            domain = Domain(
-                domain=f"{franchise.schema_name}.{settings.DOMAIN}",
-                is_primary=True,
-                tenant=franchise,
-            )
-            domain.save()
-            connection.set_tenant(franchise)
-            User.initial_user(email=franchise.client.email, hash_password=franchise.client.password)
-            connection.set_schema_to_public()
-            messages.success(request, "La franquicia ha sido creada exitosamente")
-            return redirect("franchise_list")
+            try:
+                user, user_response = signup(request,user_type='admin')
+                franchise = form_franchise.save(commit=False)
+                franchise.client = user
+                franchise.plan = plan
+                franchise.save()
+                domain = Domain(
+                    domain=f"{franchise.schema_name}.{settings.DOMAIN}",
+                    is_primary=True,
+                    tenant=franchise,
+                )
+                domain.save()
+                connection.set_tenant(franchise)
+                User.initial_user(email=franchise.client.email, hash_password=franchise.client.password)
+                connection.set_schema_to_public()
+                messages.success(request, "La franquicia ha sido creada exitosamente")
+                return redirect("franchise_list")
+            except:
+                messages.error(
+                    request, "No se pudo registrar la franquicia, contacte al soporte"
+                )
         else:
             messages.error(
                 request, "No se pudo registrar la franquicia, contacte al soporte"
             )
     else:
-        form = FranchiseForm()
+        form_franchise = FranchiseForm()
+        form_user = SignUpForm()
 
     return render(
         request,
         "franchises/registry_franchises.html",
         {
-            "form": form,
+            "form_franchise": form_franchise,
+            "form_user":form_user,
             "title": "Franchise registry",
             "domains": Domain.objects.exclude(tenant__schema_name="public")
             .select_related("tenant")
@@ -92,11 +104,11 @@ def franchise_list(request):
 
 
 #@verify_position(allowed_positions=[User.FRANCHISE])
-def dump_data(request, empresa_id):
+def dump_data(request, franchise_id=1):
     """
     Función que permite obtener un backup de los datos de la empresa a un cliente
     :param request:
-    :param empresa_id:
+    :param franchise_id:
     :return:
     """
     import sys
@@ -111,13 +123,13 @@ def dump_data(request, empresa_id):
     franchise_backup = StringIO()
 
     try:
-        franchise = Franchise.search(empresa_id)
+        franchise = Franchise.search(franchise_id)
         if franchise:
             connection.set_tenant(franchise)
             sysout = sys.stdout
             sys.stdout = franchise_backup
             call_command(
-                "dumpdata", indent=4, exclude=["auth", "sessions", "contenttypes"]
+                "dumpdata","users", indent=4#, exclude=["auth", "sessions", "contenttypes"]
             )
             sys.stdout = sysout
             connection.set_schema_to_public()
@@ -125,19 +137,19 @@ def dump_data(request, empresa_id):
             messages.error(
                 request, "Error al generar el archivo, por favor intente nuevamente."
             )
-            return redirect("empresa_gestionar_empresas_cliente")
+            return redirect("franchise_list")
 
     except Exception:
         messages.error(
             request, "Error al generar el archivo, por favor intente nuevamente."
         )
-        return redirect("empresa_gestionar_empresas_cliente")
+        return redirect("franchise_list")
 
     franchise_backup.seek(0)
     response = HttpResponse(franchise_backup, content_type="application/text")
     franchise_backup.close()
     response["Content-Disposition"] = (
-        "attachment; filename=backup-%s.json" % franchise.nombre
+        "attachment; filename=backup-%s.json" % franchise.name
     )
 
     return response

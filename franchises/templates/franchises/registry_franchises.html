@@ -29,11 +29,17 @@
                 <div class="panel-body">
 
                     <form class="form-vertical" method="POST">{% csrf_token %}
-                        {% bootstrap_form form layout="vertical" %}
+                        {% bootstrap_form form_franchise layout="vertical" %}
+                            <div class="panel-control">
+                            <h3 class="panel-title">Administrador de la franquicia</h3>
+                            </div>
+                        {% bootstrap_form form_user layout="vertical" %}
+
                         <div class="col-sm-6 col-md-4">
-                            {% if form.captcha.errors %}
+                            {% if form_franchise.captcha.errors %}
                                 <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top:10px">
-                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
                                     Debe realizar la verificación del reCAPTCHA ("No soy un robot")
                                 </div>
                             {% endif %}
