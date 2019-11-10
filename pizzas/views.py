@@ -7,9 +7,9 @@ from pizzas.forms import PizzaForm
 from pizzas.models import Pizza
 
 
-def topping_management(request, plan_id=None):
-    if plan_id:
-        topping = get_object_or_404(Topping, id=plan_id)
+def topping_management(request, topping_id=None):
+    if topping_id:
+        topping = get_object_or_404(Topping, id=topping_id)
     else:
         topping = None
 

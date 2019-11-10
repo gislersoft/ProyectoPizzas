@@ -3,48 +3,72 @@
 
 {% url 'test_base' as test_base %}
 <li class="{% if test_base in request.path %} active {% endif %}">
-    <a href="{{ test_base }}">
-        <i class="ti-home"></i>
-        <span class="menu-title">Inicio</span>
-    </a>
+  <a href="{{ test_base }}">
+    <i class="ti-home"></i>
+    <span class="menu-title">Inicio</span>
+  </a>
 </li>
-{% if request.tenant.schema_name == "public" %}
-    {% url 'plan_management' as plan_management %}
-    {% url 'franchise_list' as franchise_list %}
-    <li class="{% if "franchises/" in request.path %} active active-sub {% endif %}">
-        <a href="#">
-            <i class="ti-agenda"></i>
-            <span class="menu-title">
-      Gestión de franquicias
-    </span>
-            <i class="arrow"></i>
+{% if request.tenant.schema_name == "public" and request.user.user_type == "Administrador" %}
+  {% url 'plan_management' as plan_management %}
+  {% url 'franchise_list' as franchise_list %}
+  <li class="{% if "franchises/" in request.path %} active active-sub {% endif %}">
+    <a href="#">
+      <i class="ti-agenda"></i>
+      <span class="menu-title">
+              Gestión de franquicias
+            </span>
+      <i class="arrow"></i>
+    </a>
+    <ul class="collapse">
+      <li class="{% if franchise_list in request.path %} active {% endif %}">
+        <a href="{% url 'franchise_list' %}">
+          <span class="">Listado de franquicias</span>
         </a>
-        <ul class="collapse">
-            <li class="{% if franchise_list in request.path %} active {% endif %}">
-                <a href="{% url 'franchise_list' %}">
-                    <span class="">Listado de franquicias</span>
-                </a>
-            </li>
-            <li class="{% if plan_management in request.path %} active {% endif %}">
-                <a href="{% url 'plan_management' %}">
-                    <span class="">Registro de planes</span>
-                </a>
-            </li>
-        </ul>
-    </li>
+      </li>
+      <li class="{% if plan_management in request.path %} active {% endif %}">
+        <a href="{% url 'plan_management' %}">
+          <span class="">Registro de planes</span>
+        </a>
+      </li>
+    </ul>
+  </li>
 {% endif %}
 
-<li class="{% if users_listado in request.path %} active {% endif %}">
+{% if request.user.user_type == "Administrador" %}
+  {% url 'users_list' as users_list%}
+  <li class="{% if users_list in request.path %} active {% endif %}">
     <a href="{% url 'users_list' %}">
-        <i class="ti-user"></i>
-        <span class="menu-title">Gestión de Usuarios</span>
+      <i class="ti-user"></i>
+      <span class="menu-title">Gestión de Usuarios</span>
     </a>
-</li>
+  </li>
+{% endif %}
 
-{% url 'topping_management' as topping_management %}
-<li class="{% if topping_management in request.path %} active {% endif %}">
+
+{% if request.tenant.schema_name != "public" and request.user.user_type == "Administrador" %}
+  {% url 'topping_management' as topping_management %}
+  <li class="{% if topping_management in request.path %} active {% endif %}">
     <a href="{{ topping_management }}">
-        <i class="ti-home"></i>
-        <span class="menu-title">Gestión de ingredientes</span>
+      <i class="ti-home"></i>
+      <span class="menu-title">Gestión de ingredientes</span>
     </a>
-</li>
+  </li>
+{% endif %}
+
+{% if request.tenant.schema_name == "public" and request.user.user_type == "Franquicia" %}
+  {% url 'franchise_list' as franchise_list %}
+  <li class="{% if "franchises/" in request.path %} active active-sub {% endif %}">
+    <a href="#">
+      <i class="ti-agenda"></i>
+      <span class="menu-title">Gestión de franquicias</span>
+      <i class="arrow"></i>
+    </a>
+    <ul class="collapse">
+      <li class="{% if franchise_list in request.path %} active {% endif %}">
+        <a href="{% url 'franchise_list' %}">
+          <span class="">Listado de franquicias</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+{% endif %}

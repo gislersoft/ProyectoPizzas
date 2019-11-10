@@ -1,0 +1,54 @@
+{% extends "tables_base.html" %}
+
+{% load static %}
+
+{% block breadcrumb %}
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Gestión de Clientes</a></li>
+  <li class="active">Lista de Clientes</li>
+{% endblock breadcrumb %}
+
+{%block title %}
+    Listado de Clientes
+{% endblock title %}
+
+{% block panel_body%}
+    <div class="table-responsive">
+        {% if users %}
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <th>NOMBRE COMPLETO</th>
+                    <th>EMAIL</th>
+                    <th>ES STAFF</th>
+                    <th>ESTADO</th>
+                    <th>FECHA DE ACTIVACION</th>
+                    <th>TIPO DE USUARIO</th>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td> {{ user.first_name }} {{ user.last_name }} </td>
+                        <td> {{ user.email }} </td>
+                        <td>
+                            {% if user.is_staff == True %}
+                                SI
+                            {% else %}
+                                NO
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.is_active == True %}
+                                Activo
+                            {% else %}
+                                Inactivo
+                            {% endif %}
+                        </td>
+                        <td> {{ user.date_joined }} </td>
+                        <td> Cliente </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock panel_body %}

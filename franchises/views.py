@@ -1,15 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
-
-from franchises.forms import PlanForm
-from franchises.models import Plan, Module
-from django.conf import settings
-from django.shortcuts import render, redirect
 from django.db import connection
-from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect
+
+from SuperPizzas.utils import verify_position
 from .forms import *
 from .models import *
-from SuperPizzas.utils import verify_position
 
 
 def plan_management(request, plan_id=None):
@@ -36,34 +32,32 @@ def plan_management(request, plan_id=None):
     )
 
 
-# @verify_position(allowed_position=["Administrador"])
+@verify_position(allowed_positions=[User.FRANCHISE])
 def register_franchise(request, plan_id=1):
     plan = Plan.search(plan_id)
     if not plan:
         messages.error(request, "No existe el plan buscado")
-        return redirect("inicio")
+        return redirect("home")
 
     if request.method == "POST":
-
         form = FranchiseForm(request.POST)
-
         if form.is_valid():
-
-            franchise = form.save()
+            from django.db import connection
+            franchise = form.save(commit=False)
+            franchise.client = request.user
+            franchise.plan = plan
+            franchise.save()
             domain = Domain(
                 domain=f"{franchise.schema_name}.{settings.DOMAIN}",
                 is_primary=True,
                 tenant=franchise,
             )
             domain.save()
-            # connection.set_tennant(franchise)
-            User.initial_user(franchise.client)
+            connection.set_tenant(franchise)
+            User.initial_user(email=franchise.client.email, hash_password=franchise.client.password)
             connection.set_schema_to_public()
-
-            franchise.plan = plan
-            franchise.save()
             messages.success(request, "La franquicia ha sido creada exitosamente")
-            return redirect("franchise_register_franchise")
+            return redirect("franchise_list")
         else:
             messages.error(
                 request, "No se pudo registrar la franquicia, contacte al soporte"
@@ -86,7 +80,7 @@ def register_franchise(request, plan_id=1):
 
 
 def franchise_list(request):
-    franchises = Franchise.objects.all()
+    franchises = Franchise.objects.filter(client=request.user) if request.user.user_type == User.FRANCHISE else Franchise.objects.all()
     return render(
         request, "franchises/franchises_list.html", {"franchises": franchises}
     )

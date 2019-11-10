@@ -367,29 +367,29 @@
             <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
                 <span class="ic-user pull-right">
                     {% if user.avatar %}
-                      <img class="img-circle img-user media-object" src="{{ user.avatar.url }}" alt="">
+                      <img class="img-circle img-user media-object" src="{{ request.user.avatar.url }}" alt="">
                     {% else %}
                       <img class="img-circle img-user media-object" src="{% static 'img/desconocido.jpg' %}" alt="">
                     {% endif %}
                 </span>
               <div class="username hidden-xs">
-                {{ user.get_full_name }} ({{ user.user_type }})
+                {{ request.user }} ({{ request.user.user_type }})
               </div>
             </a>
 
             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
-{#              <ul class="head-list">#}
-{#                <li>#}
-{#                  <a href="{% url 'usuario_perfil_usuario' user.pk %}">#}
-{#                    Perfil del usuario#}
-{#                  </a>#}
-{#                </li>#}
-{#              </ul>#}
-{#              <div class="pad-all bord-top">#}
-{#                <a href="{% url 'logout' %}" class="btn-link text-main box-block">#}
-{#                  Cerrar sesión#}
-{#                </a>#}
-{#              </div>#}
+              <ul class="head-list">
+                <li>
+                  <a href="{% url 'user_profile' %}">
+                    Perfil del usuario
+                  </a>
+                </li>
+              </ul>
+              <div class="pad-all bord-top">
+                <a href="{% url 'logout' %}" class="btn-link text-main box-block">
+                  Cerrar sesión
+                </a>
+              </div>
             </div>
           </li>
           <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
