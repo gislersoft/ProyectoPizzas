@@ -27,7 +27,7 @@
           <h3 class="panel-title">Gestionar pizzas</h3>
         </div>
         <div class="panel-body">
-          <form class="form-vertical" method="POST" enctype="multipart/form-data">{% csrf_token %}
+          <form class="form-vertical" id="pizza_form" method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div class="row">
               <div class="col-sm-12 col-md-12">
                 {% bootstrap_form form layout="vertical" %}
@@ -38,9 +38,24 @@
                 {% endif %}
               </div>
             </div>
+            <div class="row">
+              <h4 style="padding-left:10px">Ingredientes</h4>
+            </div>
+            <div class="row">
+              <div style="padding-left:10px">
+                {% for topping in toppings_list %}
+                <div>
+                  <input type="checkbox" value="{{ topping.id }}" on/>
+                  <img src="{{ topping.image.url }}" width="42" height="42"/>
+                  {{ topping.name }}
+                </div>
+                {% endfor %}
+                <input id="toppings" name="toppings" type="hidden" value="" />
+              </div>
+            </div>
             <div class="col-xs-12" align="right">
               <a href="{% url 'home' %}" class="btn btn-dark">Volver</a>
-              <button type="submit" class="btn btn-primary">
+              <button type="button" class="btn btn-primary" id="save_button" disabled>
                 Guardar
               </button>
             </div>
@@ -52,3 +67,28 @@
   </div>
 {% endblock %}
 
+{% block js %}
+<script>
+  $(document).ready(function() {
+    // If there is no topping selected just disable save button
+    $(':checkbox').each(function(){
+      $(this).click(function() {
+        $('#save_button').attr("disabled", true);
+        $(':checkbox:checked').each(function(){
+          $('#save_button').attr("disabled", false);
+        });
+      });
+    });
+    // When saved button is clicked store the selected toppings in the hidden field
+    $('#save_button').click(function(){
+      var selectedToppings = [];
+      $(':checkbox:checked').each(function(i){
+        selectedToppings[i] = $(this).val();
+      });
+      $('#toppings').val(selectedToppings);
+      // Send the form
+      $('#pizza_form').submit();
+    });
+  });
+</script>
+{% endblock js %}

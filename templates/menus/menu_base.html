@@ -55,6 +55,16 @@
   </li>
 {% endif %}
 
+{% if request.tenant.schema_name != "public" and request.user.user_type == "Administrador" %}
+  {% url 'pizzas_management' as pizzas_management %}
+  <li class="{% if pizzas_management in request.path %} active {% endif %}">
+    <a href="{{ pizzas_management }}">
+      <i class="ti-palette"></i>
+      <span class="menu-title">Gestión de pizzas</span>
+    </a>
+  </li>
+{% endif %}
+
 {% if request.tenant.schema_name == "public" and request.user.user_type == "Franquicia" %}
   {% url 'franchise_list' as franchise_list %}
   <li class="{% if "franchises/" in request.path %} active active-sub {% endif %}">

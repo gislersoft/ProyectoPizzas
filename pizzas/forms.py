@@ -8,7 +8,8 @@ class ToppingForm(forms.ModelForm):
         model = Topping
         fields = ("name", "image")
 
+
 class PizzaForm(forms.ModelForm):
     class Meta:
         model = Pizza
-        fields = ("image", "toppings", "price")
+        fields = ("name", "image", "price")
