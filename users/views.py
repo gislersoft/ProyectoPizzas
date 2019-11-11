@@ -7,7 +7,15 @@ from .forms import *
 from .models import *
 from django.views.generic import ListView
 
+from .forms import SignUpForm, UserProfileForm
 
+
+def clients_list(request):
+    users = User.objects.filter(user_type="CLIENT")
+    contexto = {'users':users}
+    return render(request, 'clients_list.html',contexto)
+
+  
 def home(request):
     return render(request, "home_test.html")
 
