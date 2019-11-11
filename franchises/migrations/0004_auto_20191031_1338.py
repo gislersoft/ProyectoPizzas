@@ -7,28 +7,37 @@ import franchises.models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('franchises', '0003_auto_20191017_1910'),
-    ]
+    dependencies = [("franchises", "0003_auto_20191017_1910")]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='plan',
-            options={'ordering': ['price']},
+        migrations.AlterModelOptions(name="plan", options={"ordering": ["price"]}),
+        migrations.AlterField(
+            model_name="franchise",
+            name="plan",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="franchises",
+                to="franchises.Plan",
+                verbose_name="Plan",
+            ),
         ),
         migrations.AlterField(
-            model_name='franchise',
-            name='plan',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='franchises', to='franchises.Plan', verbose_name='Plan'),
+            model_name="franchise",
+            name="schema_name",
+            field=models.CharField(
+                max_length=300,
+                unique=True,
+                validators=[franchises.models.check_schema_name],
+                verbose_name="Subdominio",
+            ),
         ),
         migrations.AlterField(
-            model_name='franchise',
-            name='schema_name',
-            field=models.CharField(max_length=300, unique=True, validators=[franchises.models.check_schema_name], verbose_name='Subdominio'),
-        ),
-        migrations.AlterField(
-            model_name='franchise',
-            name='validity',
-            field=models.DateTimeField(help_text='Fecha hasta la que se encuentra pago el servicio', verbose_name='Fecha de vencimiento del servicio'),
+            model_name="franchise",
+            name="validity",
+            field=models.DateTimeField(
+                help_text="Fecha hasta la que se encuentra pago el servicio",
+                verbose_name="Fecha de vencimiento del servicio",
+            ),
         ),
     ]

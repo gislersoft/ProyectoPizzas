@@ -26,6 +26,7 @@ urlpatterns = [
     url(r"^", include("public_view.urls")),
     url(r"^users/", include("users.urls")),
     url(r"^franchises/", include("franchises.urls")),
+    url(r"^users/", include("users.urls")),
     path(
         "test-base", TemplateView.as_view(template_name="base.html"), name="test_base"
     ),
