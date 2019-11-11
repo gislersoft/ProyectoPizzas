@@ -6,7 +6,11 @@ from .views import *
 
 urlpatterns = [
     path("topping-management/", topping_management, name="topping_management"),
-    path("topping-management/<int:topping_id>", topping_management, name="topping_management"),
+    path(
+        "topping-management/<int:topping_id>",
+        topping_management,
+        name="topping_management",
+    ),
     path("pizzas-management/<int:plan_id>", pizzas_management, name="pizzas_management"),
     path("pizzas-management/", pizzas_management, name="pizzas_management"),
 ]
