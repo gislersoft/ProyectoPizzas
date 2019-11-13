@@ -13,4 +13,5 @@ urlpatterns = [
     ),
     path("pizzas-management/<int:plan_id>", pizzas_management, name="pizzas_management"),
     path("pizzas-management/", pizzas_management, name="pizzas_management"),
+    path('pizzas_list/', pizzas_list, name='pizzas_list'),
 ]

@@ -6,6 +6,10 @@ from pizzas.models import Topping
 from pizzas.forms import PizzaForm
 from pizzas.models import Pizza
 
+def pizzas_list(request):
+    pizzas = Pizza.objects.all()
+    contexto = {'pizzas': pizzas}
+    return render(request, 'pizzas_list.html', contexto)
 
 def topping_management(request, topping_id=None):
     if topping_id:
