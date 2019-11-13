@@ -24,12 +24,11 @@ class customManager(BaseUserManager):
         user.set_password(password)
         user.save()
 
-    def create_superuser(self, email, password, first_name, last_name):
+    def create_superuser(self, email, password):
         user = User.objects.create(
                     email=email,
-                    first_name=first_name,
-                    last_name=last_name,
                     is_active=True,
+                    is_staff=True,
             )
         user.set_password(password)
         user.save()

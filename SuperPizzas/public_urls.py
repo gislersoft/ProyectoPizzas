@@ -21,6 +21,7 @@ from django.conf.urls import url
 
 # Test
 from django.views.generic import TemplateView
+from django.contrib import admin
 
 urlpatterns = [
     url(r"^", include("public_view.urls")),
@@ -38,5 +39,13 @@ urlpatterns = [
         "test-landing",
         TemplateView.as_view(template_name="landing_base.html"),
         name="test_landing",
+    ),
+    path(
+        "admin",
+        admin.site.urls
+    ),
+    path(
+        "accounts",
+        include("allauth.urls")
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

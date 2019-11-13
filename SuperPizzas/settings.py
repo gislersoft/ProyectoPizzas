@@ -45,6 +45,12 @@ SHARED_APPS = (
     "bootstrap3",
     "django_select2",
     "simple_history",
+    "django.contrib.admin",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.facebook",
     "public_view",
     "franchises",
     "users",
@@ -105,6 +111,16 @@ TEMPLATES = [
         },
     }
 ]
+
+# Social login feature ---
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+# Social login feature ---
 
 WSGI_APPLICATION = "SuperPizzas.wsgi.application"
 
