@@ -42,6 +42,7 @@ SHARED_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "captcha",
     "bootstrap3",
     "django_select2",
     "simple_history",
@@ -65,6 +66,7 @@ TENANT_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "captcha",
     "bootstrap3",
     "django_select2",
     "simple_history",
@@ -171,9 +173,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Bogota"
 
 USE_I18N = True
 
@@ -195,6 +197,10 @@ MAX_FILE_SIZE = 10485760  # 10MB
 
 DOMAIN = "localhost"
 
+
+RECAPTCHA_PUBLIC_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+RECAPTCHA_PRIVATE_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+NOCAPTCHA = True
 # LOGIN/LOGOUT/SIGN-UP
 LOGIN_REDIRECT_URL = 'home_test'
 LOGOUT_REDIRECT_URL = 'home_test'
