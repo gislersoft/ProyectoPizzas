@@ -11,7 +11,7 @@ from .forms import SignUpForm, UserProfileForm
 
 
 def clients_list(request):
-    users = User.objects.filter(user_type="CLIENT")
+    users = User.objects.filter(user_type="Cliente")
     contexto = {'users':users}
     return render(request, 'clients_list.html',contexto)
 
