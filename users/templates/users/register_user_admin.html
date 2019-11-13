@@ -49,7 +49,69 @@
         <div class="panel-footer"></div>
       </div>
     </div>
-    <!–– TODO list user -->
+    <div class="col-sm-12 col-md-6 col-lg-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-control">
+          </div>
+          <h3 class="panel-title">Usuarios registrados en el sistema</h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered responsive-table">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Es Staff</th>
+                  <th>Activo</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                  <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>
+                      {% if user.is_staff == True %}
+                          SI
+                      {% else %}
+                          NO
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if user.is_active == True %}
+                            Activo
+                        {% else %}
+                            Inactivo
+                        {% endif %}
+                    </td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-primary btn-active-primary dropdown-toggle"
+                                data-toggle="dropdown" type="button">
+                          Opciones <i class="ti-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li>
+                            <a href="">Editar</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel-footer">
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
