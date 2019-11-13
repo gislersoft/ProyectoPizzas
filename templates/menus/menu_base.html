@@ -80,6 +80,16 @@
   </li>
 {% endif %}
 
+{% if request.user.user_type == "Administrador" %}
+  {% url 'clients_list' as clients_list%}
+  <li class="{% if clients_list in request.path %} active {% endif %}">
+    <a href="{% url 'clients_list' %}">
+      <i class="ti-user"></i>
+      <span class="menu-title">Gestión de Clientes</span>
+    </a>
+  </li>
+{% endif %}
+
 {% if request.tenant.schema_name == "public" and request.user.user_type == "Franquicia" %}
   {% url 'franchise_list' as franchise_list %}
   <li class="{% if "franchises/" in request.path %} active active-sub {% endif %}">
