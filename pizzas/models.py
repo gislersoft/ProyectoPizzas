@@ -31,6 +31,7 @@ def pizza_image_path(instance, filename):
 
 class Pizza(models.Model):
     DEFAULT_IMAGE = "images/pizza_default.png"
+    name = models.CharField("Nombre", default="", max_length=250)
     image = models.ImageField(
         verbose_name="Imagen", upload_to=pizza_image_path, blank=True, null=True
     )
