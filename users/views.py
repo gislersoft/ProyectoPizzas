@@ -19,7 +19,7 @@ def clients_list(request):
     context = {'users': users}
     return render(request, 'clients_list.html', context)
 
-  
+
 def home(request):
     return render(request, "home_test.html")
 
