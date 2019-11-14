@@ -2,6 +2,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import make_password
 from .forms import *
 from .models import *
@@ -10,12 +11,15 @@ from django.views.generic import ListView
 from .forms import SignUpForm, UserProfileForm
 
 
+@login_required
+@user_passes_test(lambda user: True if user.user_type == User.ADMINISTRATOR else False,
+                  login_url="home")
 def clients_list(request):
-    users = User.objects.filter(user_type="Cliente")
-    contexto = {'users':users}
-    return render(request, 'clients_list.html',contexto)
+    users = User.objects.filter(user_type="CLIENT")
+    context = {'users': users}
+    return render(request, 'clients_list.html', context)
 
-  
+
 def home(request):
     return render(request, "home_test.html")
 
