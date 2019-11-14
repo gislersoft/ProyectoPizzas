@@ -49,6 +49,7 @@ SHARED_APPS = (
     "public_view",
     "franchises",
     "users",
+    "social_django",
 )
 
 
@@ -66,6 +67,7 @@ TENANT_APPS = (
     "simple_history",
     "pizzas",
     "users",
+    "social_django",
 )
 
 INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
@@ -110,6 +112,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "SuperPizzas.wsgi.application"
+
+# ---
+# Social Auth Feature
+AUTHENTICATION_BACKENDS = [
+        'social_core.backends.linkedin.LinkedinOAuth2',
+        'social_core.backends.instagram.InstagramOAuth2',
+        'social_core.backends.facebook.FacebookOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+    ]
+
+SOCIAL_AUTH_FACEBOOK_KEY = "975746819426741"
+SOCIAL_AUTH_FACEBOOK_SECRET = "18f4cba9bb2cbe58fb7908ac014ea07a"
+
+# ---
 
 
 # Database
@@ -188,5 +204,7 @@ RECAPTCHA_PUBLIC_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
 RECAPTCHA_PRIVATE_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
 NOCAPTCHA = True
 # LOGIN/LOGOUT/SIGN-UP
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = "dashboard"
+LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = "home"

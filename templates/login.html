@@ -13,5 +13,18 @@
 		{% bootstrap_form form layout="vertical" %}
 		<button type="submit" class="btn btn-primary center-block">Entrar</button>
 	</form>
+
+	<hr>
+
+	<button class="btn btn-danger mb-2 center-block">
+		<a href="#">Login with Instagram</a>
+	</button>
+	<button class="btn btn-primary mb-2 center-block">
+		<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+	</button>
+	<button class="btn btn-info mb-2 center-block">
+		<a href="#">Login with LinkedIn</a>
+	</button>
+
 </div>
 {% endblock %}
