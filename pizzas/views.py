@@ -6,10 +6,17 @@ from pizzas.models import Topping
 from pizzas.forms import PizzaForm
 from pizzas.models import Pizza
 
+
 def pizzas_list(request):
-    pizzas = Pizza.objects.all()
-    contexto = {'pizzas': pizzas}
-    return render(request, 'pizzas_list.html', contexto)
+    pizzas_list2 = Pizza.objects.all()
+    lista = []
+    for i in list(pizzas_list2):
+        lista.append({ "id":i.id, "toppings":list(i.toppings.all())})
+
+    print(lista)
+    context = {'pizzas': list(pizzas_list2), 'toppings_map': lista}
+    return render(request, 'pizzas_list.html', context)
+
 
 def topping_management(request, topping_id=None):
     if topping_id:
