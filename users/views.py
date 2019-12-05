@@ -12,12 +12,14 @@ from .forms import SignUpForm, UserProfileForm
 
 
 @login_required
-@user_passes_test(lambda user: True if user.user_type == User.ADMINISTRATOR else False,
-                  login_url="home")
+@user_passes_test(
+    lambda user: True if user.user_type == User.ADMINISTRATOR else False,
+    login_url="home",
+)
 def clients_list(request):
     users = User.objects.filter(user_type="CLIENT")
-    context = {'users': users}
-    return render(request, 'clients_list.html', context)
+    context = {"users": users}
+    return render(request, "clients_list.html", context)
 
 
 def home(request):
@@ -68,7 +70,12 @@ def register_user_admin(request):
         return render(
             request,
             "users/register_user_admin.html",
-            {"form": form, "title": "User registration", "domain": settings.DOMAIN, "users": User.objects.all()},
+            {
+                "form": form,
+                "title": "User registration",
+                "domain": settings.DOMAIN,
+                "users": User.objects.all(),
+            },
         )
     else:
         messages.error(

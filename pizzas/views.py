@@ -43,18 +43,21 @@ def pizzas_management(request, plan_id=None):
         form = PizzaForm(request.POST, request.FILES, instance=pizza)
 
         toppings = []
-        topping_lists = request.POST.get("toppings", "").split(',')
+        topping_lists = request.POST.get("toppings", "").split(",")
         for topping_id in topping_lists:
             toppings.append(Topping.objects.get(pk=topping_id))
 
         if form.is_valid():
             obj = Pizza()  # gets new object
-            obj.name = form.cleaned_data['name']
-            obj.image = form.cleaned_data['image']
-            obj.price = form.cleaned_data['price']
-            obj.save();  # Save the pizza to get a new id.
-            obj.toppings.set(toppings);  # Add the toppings
-            obj.save();  # Save again.
+            obj.name = form.cleaned_data["name"]
+            obj.image = form.cleaned_data["image"]
+            obj.price = form.cleaned_data["price"]
+            obj.save()
+            # Save the pizza to get a new id.
+            obj.toppings.set(toppings)
+            # Add the toppings
+            obj.save()
+            # Save again.
             messages.success(request, "pizza guardada correctamente")
             form = PizzaForm()
         else:

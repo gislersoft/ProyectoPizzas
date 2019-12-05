@@ -54,6 +54,28 @@ def check_schema_name(name):
 
 
 class Franchise(TenantMixin):
+    THEME_TYPE = (
+        ("a", "Tema A"),
+        ("b", "Tema B"),
+        ("c", "Tema C"),
+        ("d", "Tema D"),
+        ("e", "Tema E"),
+    )
+    THEME_COLOR = (
+        ("coffee", "Café"),
+        ("dark", "Oscuro"),
+        ("dust", "Arena"),
+        ("gray", "Gris"),
+        ("lime", "Lima"),
+        ("mint", "Menta"),
+        ("navy", "Azul marino"),
+        ("ocean", "Oceano"),
+        ("prickly-pear", "Higo"),
+        ("purple", "Violeta"),
+        ("well-red", "Rojo"),
+        ("yellow", "Amarillo"),
+    )
+
     name = models.CharField("Nombre de la franquicia", max_length=300, unique=True)
     schema_name = models.CharField(
         "Subdominio", max_length=300, unique=True, validators=[check_schema_name]
@@ -71,6 +93,17 @@ class Franchise(TenantMixin):
         on_delete=models.SET_NULL,
         null=True,
         verbose_name="Plan",
+    )
+    theme = models.CharField(
+        "Tema", max_length=50, choices=THEME_TYPE, null=False, blank=False, default="a"
+    )
+    color = models.CharField(
+        "Tema",
+        max_length=50,
+        choices=THEME_COLOR,
+        null=False,
+        blank=False,
+        default="well-red",
     )
     validity = models.DateTimeField(
         "Fecha de vencimiento del servicio",

@@ -21,9 +21,11 @@ from django.conf.urls import url
 
 # Test
 from django.views.generic import TemplateView
+from franchises.views import theme
 
 urlpatterns = [
     url(r"^", include("public_view.urls")),
+    path("theme/", theme, name="theme"),
     url(r"^users/", include("users.urls")),
     url(r"^franchises/", include("franchises.urls")),
     url(r"^users/", include("users.urls")),

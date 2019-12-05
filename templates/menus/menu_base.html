@@ -107,3 +107,13 @@
     </ul>
   </li>
 {% endif %}
+
+{% if request.user.user_type == "Franquicia" or request.user.user_type == "Administrador" %}
+  {% url 'theme' as theme %}
+  <li class="{% if 'theme/' in request.path %} active active-sub {% endif %}">
+    <a href="{% url 'theme' %}">
+      <i class="ti-palette"></i>
+      <span class="menu-title">Temas</span>
+    </a>
+  </li>
+{% endif %}
