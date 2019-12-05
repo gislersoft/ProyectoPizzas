@@ -55,6 +55,12 @@ class FranchiseForm(forms.ModelForm):
             pass
 
 
+class ThemeForm(forms.ModelForm):
+    class Meta:
+        model = Franchise
+        fields = ("theme", "color")
+
+
 class PlanForm(forms.ModelForm):
     class Meta:
         model = Plan

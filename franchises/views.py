@@ -82,6 +82,34 @@ def register_franchise(request, plan_id=1):
     )
 
 
+def theme(request):
+    if not request.user.is_authenticated:
+        messages.error(
+            request, "Debes estar loggeado como administrador para cambiar el tema."
+        )
+        return redirect("home")
+    if request.user.user_type not in (User.FRANCHISE, User.ADMINISTRATOR):
+        messages.error(
+            request, "Debes ser el administrador de la franquicia para cambiar el tema."
+        )
+        return redirect("home")
+    instance = get_object_or_404(Franchise, name=request.tenant)
+    connection.set_schema_to_public()
+    form = ThemeForm(instance=instance)
+
+    if request.method == "POST":
+        form = ThemeForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Se ha cambiado el tema")
+            form = ThemeForm()
+            return redirect("theme")
+        else:
+            messages.error(request, "Por favor revise los campos en rojo")
+
+    return render(request, "franchises/franchise_theme.html", {"form": form})
+
+
 def franchise_list(request):
     franchises = (
         Franchise.objects.filter(client=request.user)
