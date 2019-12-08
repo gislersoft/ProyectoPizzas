@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from SuperPizzas.utils import verify_position
 from .forms import *
 from .models import *
+from utils.decorators import auth_check_msg
 
 
 def plan_management(request, plan_id=None):
@@ -82,17 +83,8 @@ def register_franchise(request, plan_id=1):
     )
 
 
+@auth_check_msg(users=(User.ADMINISTRATOR, User.FRANCHISE))
 def theme(request):
-    if not request.user.is_authenticated:
-        messages.error(
-            request, "Debes estar loggeado como administrador para cambiar el tema."
-        )
-        return redirect("home")
-    if request.user.user_type not in (User.FRANCHISE, User.ADMINISTRATOR):
-        messages.error(
-            request, "Debes ser el administrador de la franquicia para cambiar el tema."
-        )
-        return redirect("home")
     instance = get_object_or_404(Franchise, name=request.tenant)
     connection.set_schema_to_public()
     form = ThemeForm(instance=instance)
@@ -110,6 +102,7 @@ def theme(request):
     return render(request, "franchises/franchise_theme.html", {"form": form})
 
 
+@auth_check_msg(users=(User.ADMINISTRATOR,))
 def franchise_list(request):
     franchises = (
         Franchise.objects.filter(client=request.user)

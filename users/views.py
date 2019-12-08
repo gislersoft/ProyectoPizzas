@@ -7,15 +7,12 @@ from django.contrib.auth.hashers import make_password
 from .forms import *
 from .models import *
 from django.views.generic import ListView
+from utils.decorators import auth_check_msg
 
 from .forms import SignUpForm, UserProfileForm
 
 
-@login_required
-@user_passes_test(
-    lambda user: True if user.user_type == User.ADMINISTRATOR else False,
-    login_url="home",
-)
+@auth_check_msg(users=(User.ADMINISTRATOR,))
 def clients_list(request):
     users = User.objects.filter(user_type="CLIENT")
     context = {"users": users}
@@ -46,42 +43,33 @@ def signup(request):
     return render(request, "signup.html", {"form": form})
 
 
+@auth_check_msg(users=(User.ADMINISTRATOR,))
 def register_user_admin(request):
-    if not request.user.is_authenticated:
-        messages.error(request, f"Debes iniciar sesión.")
-        return redirect("login")
-    if request.user.user_type == User.ADMINISTRATOR:
-        if request.method == "POST":
+    if request.method == "POST":
+        form = UserForm(request.POST)
 
-            form = UserForm(request.POST)
+        if form.is_valid():
 
-            if form.is_valid():
-
-                form.save()
-                messages.success(request, "El usuario ha sido creada exitosamente")
-                return redirect("register_user_admin")
-            else:
-                messages.error(
-                    request, "No se pudo registrar al usuario, contacte al soporte"
-                )
+            form.save()
+            messages.success(request, "El usuario ha sido creada exitosamente")
+            return redirect("register_user_admin")
         else:
-            form = UserForm()
-
-        return render(
-            request,
-            "users/register_user_admin.html",
-            {
-                "form": form,
-                "title": "User registration",
-                "domain": settings.DOMAIN,
-                "users": User.objects.all(),
-            },
-        )
+            messages.error(
+                request, "No se pudo registrar al usuario, contacte al soporte"
+            )
     else:
-        messages.error(
-            request, f"Como {request.user.user_type} no puedes acceder a esta página."
-        )
-        return redirect("home")
+        form = UserForm()
+
+    return render(
+        request,
+        "users/register_user_admin.html",
+        {
+            "form": form,
+            "title": "User registration",
+            "domain": settings.DOMAIN,
+            "users": User.objects.all(),
+        },
+    )
 
 
 class UsersList(ListView):
