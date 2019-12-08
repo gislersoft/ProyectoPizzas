@@ -46,7 +46,9 @@
                 {% for topping in toppings_list %}
                 <div>
                   <input type="checkbox" value="{{ topping.id }}" on/>
+                   {% if topping.image %}
                   <img src="{{ topping.image.url }}" width="42" height="42"/>
+                   {% endif %}
                   {{ topping.name }}
                 </div>
                 {% endfor %}
