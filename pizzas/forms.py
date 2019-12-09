@@ -12,4 +12,5 @@ class ToppingForm(forms.ModelForm):
 class PizzaForm(forms.ModelForm):
     class Meta:
         model = Pizza
-        fields = ("name", "image", "price")
+        fields = ("name", "image", "price", "toppings")
+        widgets = {"toppings": forms.CheckboxSelectMultiple}
