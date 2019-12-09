@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from pizzas.forms import ToppingForm
 from pizzas.models import Topping
@@ -28,8 +28,8 @@ def topping_management(request, topping_id=None):
         form = ToppingForm(request.POST, request.FILES, instance=topping)
         if form.is_valid():
             form.save()
-            messages.success(request, "ingrediente guardado correctamente")
-            form = ToppingForm()
+            messages.success(request, "Ingrediente guardado correctamente.")
+            return redirect("pizzas_management")
         else:
             messages.error(request, "Por favor revise los campos en rojo")
     return render(
@@ -62,16 +62,17 @@ def pizzas_management(request, pizza_id=None):
             obj.price = form.cleaned_data["price"]
             obj.toppings.set(form.cleaned_data["toppings"])
             obj.save()
-            messages.success(request, "pizza guardada correctamente")
-            form = PizzaForm()
+            messages.success(request, "Pizza guardada correctamente.")
+            return redirect("pizzas_management")
         else:
             messages.error(request, "Por favor revise los campos en rojo")
     return render(
         request,
         "pizzas/pizzas_management.html",
-        {"form": form,
-         "toppings_list": Topping.objects.all(),
-         "pizzas": pizzas,
-         'pizza_toppings': pizza_toppings
-         },
+        {
+            "form": form,
+            "toppings_list": Topping.objects.all(),
+            "pizzas": pizzas,
+            "pizza_toppings": pizza_toppings,
+        },
     )
