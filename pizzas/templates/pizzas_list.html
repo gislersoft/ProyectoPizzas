@@ -36,12 +36,17 @@
                         <th style="padding:20px">NOMBRE</th>
                         <th style="padding:20px">PRECIO</th>
                         <th style="padding:20px">INGREDIENTES</th>
+                        <th style="padding:20px">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                   {% for pizza in pizzas %}
                     <tr>
-                        <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px"><img src="{{ pizza.image.url }}" height="50" width="100"/></td>
+                        <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px">
+                            {% if pizza.image %}<img src="{{ pizza.image.url }}" height="50" width="100"/>
+                            {% else %} NO_IMAGE
+                            {% endif %}
+                        </td>
                         <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px"> {{ pizza.name }} </td>
                         <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px"><b> ${{ pizza.price }} </b></td>
                         <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px">
@@ -52,6 +57,19 @@
                                     {% endfor %}
                                 {% endif %}
                             {% endfor %}
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-sm btn-primary btn-active-primary dropdown-toggle"
+                                    data-toggle="dropdown" type="button">
+                              Opciones <i class="ti-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                              <li>
+                                <a href="">Editar</a>
+                              </li>
+                            </ul>
+                          </div>
                         </td>
                     </tr>
                 {% endfor %}
