@@ -51,6 +51,18 @@
       <i class="ti-palette"></i>
       <span class="menu-title">Gestión de pizzas</span>
     </a>
+    <ul class="collapse">
+      <li class="{% if pizzas_management in request.path %} active {% endif %}">
+      <a href="{{ pizzas_management }}">
+        <span class="menu-title">Crear Pizzas</span>
+      </a>
+    </li>
+    <li class="{% if pizzas_list in request.path %} active {% endif %}">
+      <a href="{% url 'pizzas_list' %}">
+        <span class="menu-title">Lista de Pizzas</span>
+      </a>
+    </li>
+  </ul>
   </li>
 {% endif %}
 

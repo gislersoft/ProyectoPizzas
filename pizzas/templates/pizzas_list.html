@@ -1,0 +1,104 @@
+{% extends "tables_base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block title %}
+  Listar pizzas
+{% endblock %}
+
+{% block page_title %}
+  Listar pizzas
+{% endblock %}
+
+{% block panel_title %}
+  Listar pizzas
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="active">Gestionar pizzas</li>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-control"></div>
+          <h3 class="panel-title">Listar pizzas</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <table>
+                <thead>
+                    <tr>
+                        <th style="padding:20px">IMAGEN</th>
+                        <th style="padding:20px">NOMBRE</th>
+                        <th style="padding:20px">PRECIO</th>
+                        <th style="padding:20px">INGREDIENTES</th>
+                        <th style="padding:20px">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for pizza in pizzas %}
+                    <tr>
+                        <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px">
+                            {% if pizza.image %}<img src="{{ pizza.image.url }}" height="50" width="100"/>
+                            {% else %} NO_IMAGE
+                            {% endif %}
+                        </td>
+                        <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px"> {{ pizza.name }} </td>
+                        <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px"><b> ${{ pizza.price }} </b></td>
+                        <td class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom:10px">
+                            {% for toppings in toppings_map %}
+                                {% if toppings.id == pizza.id %}
+                                    {% for topping in toppings.toppings %}
+                                        {{ topping.name }},
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <button class="btn btn-sm btn-primary btn-active-primary dropdown-toggle"
+                                    data-toggle="dropdown" type="button">
+                              Opciones <i class="ti-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                              <li>
+                                <a href="">Editar</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}
+
+<!--
+{% block panel_body%}
+<div class="table-responsive">
+    {% if pizzas %}
+        <table class="table table-striped table-bordered">
+
+            <tbody>
+
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock panel_body %}
+-->
+</div>
+<div class="panel-footer"></div>
+</div>
+
+
+
+

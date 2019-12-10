@@ -30,7 +30,10 @@
           <form class="form-vertical" id="pizza_form" method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div class="row">
               <div class="col-sm-12 col-md-12">
-                {% bootstrap_form form layout="vertical" %}
+                {% bootstrap_field form.name layout="vertical" %}
+                {% bootstrap_field form.image layout="vertical" %}
+                {% bootstrap_field form.price layout="vertical" %}
+                {% bootstrap_field form.toppings layout="vertical" %}
                 {% if form.errors %}
                   <div class="alert alert-danger">
                     {{ form.errors }}
@@ -38,24 +41,9 @@
                 {% endif %}
               </div>
             </div>
-            <div class="row">
-              <h4 style="padding-left:10px">Ingredientes</h4>
-            </div>
-            <div class="row">
-              <div style="padding-left:10px">
-                {% for topping in toppings_list %}
-                <div>
-                  <input type="checkbox" value="{{ topping.id }}" on/>
-                  <img src="{{ topping.image.url }}" width="42" height="42"/>
-                  {{ topping.name }}
-                </div>
-                {% endfor %}
-                <input id="toppings" name="toppings" type="hidden" value="" />
-              </div>
-            </div>
             <div class="col-xs-12" align="right">
               <a href="{% url 'home' %}" class="btn btn-dark">Volver</a>
-              <button type="button" class="btn btn-primary" id="save_button" disabled>
+              <button type="submit" class="btn btn-primary">
                 Guardar
               </button>
             </div>
@@ -64,31 +52,65 @@
         <div class="panel-footer"></div>
       </div>
     </div>
+    <div class="col-sm-12 col-md-6 col-lg-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-control">
+          </div>
+          <h3 class="panel-title">Pizzas registradas</h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered responsive-table">
+              <thead>
+                <tr>
+                  <th>Imagen</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Ingredientes</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for pizza in pizzas %}
+                  <tr>
+                    <td>{% if pizza.image %}<img src="{{ pizza.image.url }}" height="50" width="50"/>
+                        {% else %} NO_IMAGE
+                        {% endif %}
+                    </td>
+                    <td>{{ pizza.name }}</td>
+                    <td>{{ pizza.price }}</td>
+                    <td>
+                        {% for toppings in pizza_toppings %}
+                            {% if toppings.id == pizza.id %}
+                                {% for topping in toppings.toppings %}
+                                    <span class="label label-default">{{ topping.name }}</span>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-primary btn-active-primary dropdown-toggle"
+                                data-toggle="dropdown" type="button">
+                          Opciones <i class="ti-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li>
+                            <a href="{{ pizza.id }}">Editar</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel-footer">
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}
-
-{% block js %}
-<script>
-  $(document).ready(function() {
-    // If there is no topping selected just disable save button
-    $(':checkbox').each(function(){
-      $(this).click(function() {
-        $('#save_button').attr("disabled", true);
-        $(':checkbox:checked').each(function(){
-          $('#save_button').attr("disabled", false);
-        });
-      });
-    });
-    // When saved button is clicked store the selected toppings in the hidden field
-    $('#save_button').click(function(){
-      var selectedToppings = [];
-      $(':checkbox:checked').each(function(i){
-        selectedToppings[i] = $(this).val();
-      });
-      $('#toppings').val(selectedToppings);
-      // Send the form
-      $('#pizza_form').submit();
-    });
-  });
-</script>
-{% endblock js %}
