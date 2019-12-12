@@ -85,7 +85,7 @@
                     <td>{{ franchise.plan|default_if_none:"" }}</td>
                     <td>{{ franchise.validity }}</td>
                     <td>
-                      <div class="dropdown">
+                      {% comment %}<div class="dropdown">
                         <button class="btn btn-sm btn-primary btn-active-primary dropdown-toggle"
                                 data-toggle="dropdown" type="button">
                           Opciones <i class="ti-angle-down"></i>
@@ -94,7 +94,7 @@
                           <li>
                           </li>
                         </ul>
-                      </div>
+                      </div>{% endcomment %}
                     </td>
                   </tr>
                 {% endfor %}

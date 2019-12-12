@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12 col-md-7 col-lg-5">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="panel-control"></div>
+          <h3 class="panel-title">Datos de usuario</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-12 col-md-4">
+                  Correo electrónico:
+              </div>
+              <div class="col-sm-12 col-md-8">
+                  {{ request.user.email }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-4">
+                  Nombres:
+              </div>
+              <div class="col-sm-12 col-md-8">
+                  {{ request.user.first_name }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-4">
+                  Apellidos:
+              </div>
+              <div class="col-sm-12 col-md-8">
+                  {{ request.user.last_name }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-4">
+                  Tipo de usuario:
+              </div>
+              <div class="col-sm-12 col-md-8">
+                  {{ request.user.user_type }}
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
