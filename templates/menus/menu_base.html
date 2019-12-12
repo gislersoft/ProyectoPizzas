@@ -120,7 +120,7 @@
   </li>
 {% endif %}
 
-{% if request.schema_name != "public" %}
+{% if request.tenant.schema_name != "public" %}
   {% if request.user.user_type == "Franquicia" or request.user.user_type == "Administrador" %}
     {% url 'theme' as theme %}
     <li class="{% if 'theme/' in request.path %} active active-sub {% endif %}">
