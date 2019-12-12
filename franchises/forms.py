@@ -14,10 +14,10 @@ class FranchiseForm(forms.ModelForm):
         from django.conf import settings
 
         super(FranchiseForm, self).__init__(*args, **kwargs)
-        self.fields["schema_name"].label = "System subdomain"
+        self.fields["schema_name"].label = "Subdominio"
         self.fields[
             "schema_name"
-        ].help_text = f"Esta será su dirección: midireccion.{settings.DOMAIN}"
+        ].help_text = f"Esta será su dirección: subdominio.{settings.DOMAIN}"
         # self.fields["client"].queryset = self.fields["client"]\
         #    .queryset.filter(position="Client")
 
