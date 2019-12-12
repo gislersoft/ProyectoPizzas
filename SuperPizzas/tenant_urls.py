@@ -24,7 +24,6 @@ from franchises.views import theme
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="base.html"), name="home"),
     path("", include("public_view.urls")),
     path("theme/", theme, name="theme"),
     path("users/", include("users.urls")),
