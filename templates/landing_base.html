@@ -34,7 +34,7 @@
   <!-- notifications -->
   <link rel="stylesheet" href="{% static 'plugins/toast/toastr/toastr.min.css' %}">
 
-  {% with "css/themes/type-a/theme-well-red.min.css" as style_url %}
+  {% with "css/themes/type-"|add:request.tenant.theme|add:"/theme-"|add:request.tenant.color|add:".min.css" as style_url %}
     <link id="app-theme" rel="stylesheet" href="{% static style_url %}">
   {% endwith %}
 
