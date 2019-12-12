@@ -97,7 +97,7 @@ def register_franchise(request, plan_id=1):
     )
 
 
-@auth_check_msg(users=(User.ADMINISTRATOR, User.FRANCHISE))
+@auth_check_msg(users=(User.ADMINISTRATOR,))
 def theme(request):
     instance = get_object_or_404(Franchise, name=request.tenant)
     connection.set_schema_to_public()
@@ -176,5 +176,4 @@ def dump_data(request, franchise_id=1):
     response["Content-Disposition"] = (
         "attachment; filename=backup-%s.json" % franchise.name
     )
-
     return response
