@@ -48,8 +48,8 @@ def pizzas_management(request, pizza_id=None):
     form = PizzaForm(instance=pizza)
     pizzas = Pizza.objects.all()
     pizza_toppings = []
-    for pizza in pizzas:
-        pizza_toppings.append({"id": pizza.id, "toppings": list(pizza.toppings.all())})
+    for pizzas_saved in pizzas:
+        pizza_toppings.append({"id": pizzas_saved.id, "toppings": list(pizzas_saved.toppings.all())})
     if request.method == "POST":
         form = PizzaForm(request.POST, request.FILES, instance=pizza)
         if form.is_valid():
