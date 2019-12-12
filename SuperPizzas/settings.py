@@ -96,7 +96,7 @@ PUBLIC_SCHEMA_URLCONF = "SuperPizzas.public_urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["templates"],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -121,6 +121,8 @@ POSTGRES_DB = "superpizzas"
 POSTGRES_USER = "postgres"
 POSTGRES_PASSWORD = "postgres"
 
+
+DOMAIN = "localhost"
 
 # settings set via env/secrets.env
 REPO_DIR = os.path.dirname(BASE_DIR)
@@ -180,8 +182,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "..", "media")
 MEDIA_URL = "/media/"
 
 MAX_FILE_SIZE = 10485760  # 10MB
-
-DOMAIN = "localhost"
 
 LOGIN_URL = "/users/login"
 

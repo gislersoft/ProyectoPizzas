@@ -16,4 +16,9 @@ urlpatterns = [
     url(
         r"^registrar-solicitud", register_franchise, name="franchise_register_franchise"
     ),
+    url(
+        r"^copia-seguridad/(?P<franchise_id>\d+)$",
+        dump_data,
+        name="franchise_backup_franchise",
+    ),
 ]

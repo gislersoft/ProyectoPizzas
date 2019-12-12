@@ -94,6 +94,18 @@
                         </ul>
                       </div>
                     </td>
+                      <td>
+                          <div class="btn-group btn-group-sm">
+                              <div class="dropdown">
+                                  <button class="btn btn-sm btn-primary btn-active-primary dropdown-toggle" data-toggle="dropdown" type="button">
+                                      Opciones <i class="ti-angle-down"></i>
+                                  </button>
+                                  <ul class="dropdown-menu dropdown-menu-right">
+                                      <li><a href="{% url 'empresa_copia_seguridad_empresa' dominio.tenant.id %}">Descargar copia de seguridad</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </td>
                   </tr>
                 {% endfor %}
               </tbody>
