@@ -11,7 +11,10 @@ class FranchiseValidityMiddleware:
         # Code to be executed for each request before
         # the view (and later middleware) are called.
         if request.path != reverse("franchise_unavailable"):
-            if request.tenant.schema_name != "public" and request.tenant.is_available() is False:
+            if (
+                request.tenant.schema_name != "public"
+                and request.tenant.is_available() is False
+            ):
                 return redirect("franchise_unavailable")
 
         response = self.get_response(request)

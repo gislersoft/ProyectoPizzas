@@ -63,9 +63,31 @@ def check_schema_name(name):
 
 
 class Franchise(TenantMixin):
+    THEME_TYPE = (
+        ("a", "Tema A"),
+        ("b", "Tema B"),
+        ("c", "Tema C"),
+        ("d", "Tema D"),
+        ("e", "Tema E"),
+    )
+    THEME_COLOR = (
+        ("coffee", "Café"),
+        ("dark", "Oscuro"),
+        ("dust", "Arena"),
+        ("gray", "Gris"),
+        ("lime", "Lima"),
+        ("mint", "Menta"),
+        ("navy", "Azul marino"),
+        ("ocean", "Oceano"),
+        ("prickly-pear", "Higo"),
+        ("purple", "Violeta"),
+        ("well-red", "Rojo"),
+        ("yellow", "Amarillo"),
+    )
+
     name = models.CharField("Nombre de la franquicia", max_length=300, unique=True)
-    schema_name = models.CharField("Subdominio",
-        max_length=300, unique=True, validators=[check_schema_name]
+    schema_name = models.CharField(
+        "Subdominio", max_length=300, unique=True, validators=[check_schema_name]
     )
     client = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -75,11 +97,26 @@ class Franchise(TenantMixin):
         null=True,
     )
     plan = models.ForeignKey(
-        Plan, related_name="franchises", on_delete=models.SET_NULL, null=True,
-            verbose_name="Plan"
+        Plan,
+        related_name="franchises",
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="Plan",
     )
-    validity = models.DateTimeField("Fecha de vencimiento del servicio",
-        help_text="Fecha hasta la que se encuentra pago el servicio"
+    theme = models.CharField(
+        "Tema", max_length=50, choices=THEME_TYPE, null=False, blank=False, default="a"
+    )
+    color = models.CharField(
+        "Tema",
+        max_length=50,
+        choices=THEME_COLOR,
+        null=False,
+        blank=False,
+        default="well-red",
+    )
+    validity = models.DateTimeField(
+        "Fecha de vencimiento del servicio",
+        help_text="Fecha hasta la que se encuentra pago el servicio",
     )
 
     def __str__(self):
@@ -110,6 +147,7 @@ class Franchise(TenantMixin):
             return Franchise.objects.get(id=id)
         except Franchise.DoesNotExist:
             return None
+
 
 class Domain(DomainMixin):
     history = HistoricalRecords()

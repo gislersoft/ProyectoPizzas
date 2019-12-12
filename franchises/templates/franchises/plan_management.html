@@ -75,7 +75,11 @@
                     <td>{{ plan.name }}</td>
                     <td>{{ plan.description }}</td>
                     <td>{{ plan.price }}</td>
-                    <td>{{ plan.get_avalaible_modules }}</td>
+                    <td>
+                      {% for module in plan.get_avalaible_modules %}
+                      <span class="label label-default">{{ module }}</span>
+                      {% endfor %}
+                    </td>
                     <td>{{ plan.max_users }}</td>
                     <td>
                       <div class="dropdown">
@@ -88,6 +92,7 @@
                             <a href="{% url 'plan_management' plan.pk %}">Editar</a>
                           </li>
                         </ul>
+                      </div>
                     </td>
                       <td>
                           <div class="btn-group btn-group-sm">

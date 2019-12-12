@@ -9,6 +9,7 @@ from users.views import signup
 from .forms import *
 from .models import *
 import sys
+from utils.decorators import auth_check_msg
 
 from django.core.management import call_command
 
@@ -96,8 +97,32 @@ def register_franchise(request, plan_id=1):
     )
 
 
+@auth_check_msg(users=(User.ADMINISTRATOR, User.FRANCHISE))
+def theme(request):
+    instance = get_object_or_404(Franchise, name=request.tenant)
+    connection.set_schema_to_public()
+    form = ThemeForm(instance=instance)
+
+    if request.method == "POST":
+        form = ThemeForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Se ha cambiado el tema")
+            form = ThemeForm()
+            return redirect("theme")
+        else:
+            messages.error(request, "Por favor revise los campos en rojo")
+
+    return render(request, "franchises/franchise_theme.html", {"form": form})
+
+
+@auth_check_msg(users=(User.ADMINISTRATOR,))
 def franchise_list(request):
-    franchises = Franchise.objects.filter(client=request.user) if request.user.user_type == User.FRANCHISE else Franchise.objects.all()
+    franchises = (
+        Franchise.objects.filter(client=request.user)
+        if request.user.user_type == User.FRANCHISE
+        else Franchise.objects.all()
+    )
     return render(
         request, "franchises/franchises_list.html", {"franchises": franchises}
     )

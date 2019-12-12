@@ -18,12 +18,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf.urls import url
+from franchises.views import theme
 
 # Test
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    path("", TemplateView.as_view(template_name="base.html"), name="home"),
     path("", include("public_view.urls")),
+    path("theme/", theme, name="theme"),
     path("users/", include("users.urls")),
     path("pizzas/", include("pizzas.urls")),
     path(
