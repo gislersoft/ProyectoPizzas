@@ -29,7 +29,7 @@ def topping_management(request, topping_id=None):
         if form.is_valid():
             form.save()
             messages.success(request, "Ingrediente guardado correctamente.")
-            return redirect("pizzas_management")
+            return redirect("topping_management")
         else:
             messages.error(request, "Por favor revise los campos en rojo")
     return render(
@@ -40,7 +40,7 @@ def topping_management(request, topping_id=None):
 
 
 def pizzas_management(request, pizza_id=None):
-    if pizza_id:
+    if pizza_id is not None:
         pizza = get_object_or_404(Pizza, id=pizza_id)
     else:
         pizza = None
@@ -53,15 +53,8 @@ def pizzas_management(request, pizza_id=None):
     if request.method == "POST":
         form = PizzaForm(request.POST, request.FILES, instance=pizza)
         if form.is_valid():
-            if pizza_id:
-                obj = Pizza.objects.get(pk=pizza_id)
-            else:
-                obj = Pizza()  # gets new object
-            obj.name = form.cleaned_data["name"]
-            obj.image = form.cleaned_data["image"]
-            obj.price = form.cleaned_data["price"]
-            obj.toppings.set(form.cleaned_data["toppings"])
-            obj.save()
+
+            form.save()
             messages.success(request, "Pizza guardada correctamente.")
             return redirect("pizzas_management")
         else:
