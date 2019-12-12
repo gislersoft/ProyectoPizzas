@@ -10,7 +10,8 @@
 {% endblock css %}
 
 {% block content %}
-    <div class="row">
+    {% if plans %}
+      <div class="row">
         <div class="col-sm-12">
             <div class=" panel panel-primary">
                 <div class="panel-body">
@@ -27,7 +28,7 @@
                                         <ul class="pricing-list">
                                             <li>Registre un máximo de <strong>{{ plan.max_users }}</strong> usuarios
                                             </li>
-                                            <li>Módulos de <strong>{{ plan.get_allowed_modules }}</strong> para uso
+                                            <li>Módulos de <strong>{{ plan.get_avalaible_modules }}</strong> para uso
                                                 ilimitado
                                             </li>
                                             <li><strong>Personalice </strong>el diseño del sistema a sus necesidades
@@ -40,18 +41,14 @@
                             </div>
                         {% endfor %}
                     </div>
-
-
-
                 </div>
             </div>
         </div>
     </div>
+    {% endif %}
 
-
-
-
-    <div class="row">
+    {% if pizzas %}
+      <div class="row">
         <div class="col-sm-12">
             <div class=" panel panel-primary">
                 <div class="panel-body">
@@ -92,6 +89,6 @@
             </div>
         </div>
     </div>
-
+    {% endif %}
 
 {% endblock content %}
