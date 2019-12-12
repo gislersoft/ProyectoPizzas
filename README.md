@@ -36,6 +36,7 @@ Recuerda agregar los criterios de aceptación a las  historias de usuario.
 * Continuous Integration / Continuos Deployment
 * Par programador (Code Review)
 * DevOps
+* Team Leader Rotation
 
 ## Instalación
 
