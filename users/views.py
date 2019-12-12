@@ -116,4 +116,4 @@ def user_profile(request):
 
 
 def dashboard(request):
-    return render(request, "base.html")
+    return render(request, "dashboard.html")
