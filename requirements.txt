@@ -1,5 +1,5 @@
 coverage==4.5.4
-Django==2.2.8
+Django==2.2.22
 django-jenkins==0.110.0
 pep8==1.7.1
 pyflakes==2.1.1
